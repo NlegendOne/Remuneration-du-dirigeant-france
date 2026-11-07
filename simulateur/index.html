@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quel statut pour mon bénéfice ?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Mise en page : un relevé en deux colonnes, la saisie à gauche (fixe sur grand écran),
+   le verdict puis le détail ligne à ligne à droite, comme une liasse qu'on lit de haut en bas. */
+:root {
+  color-scheme: light;
+  --paper: #f2f2ee;
+  --card: #fcfcfb;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --muted: #77756f;
+  --line: #e1e0d9;
+  --axis: #c3c2b7;
+  --accent: #4436c8;
+  --accent-soft: #e8e6fb;
+  --mark: #ffe066;
+  --good: #006300;
+  --bad: #b42323;
+  --s1: #2a78d6; /* EURL à l'IS */
+  --s2: #eb6834; /* SASU à l'IS */
+  --s3: #1baf7a; /* EI / EURL à l'IR */
+  --s4: #eda100; /* SASU à l'IR */
+  --display: "Bricolage Grotesque", "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #0d0d0d; --card: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7; --muted: #9a988f;
+    --line: #2c2c2a; --axis: #45453f; --accent: #a69cf5; --accent-soft: #24213d; --mark: #5c4b00;
+    --good: #3ccf3c; --bad: #f07a7a;
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #0d0d0d; --card: #1a1a19; --ink: #f0efec; --ink-2: #c3c2b7; --muted: #9a988f;
+  --line: #2c2c2a; --axis: #45453f; --accent: #a69cf5; --accent-soft: #24213d; --mark: #5c4b00;
+  --good: #3ccf3c; --bad: #f07a7a;
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--paper); color: var(--ink); font: 15px/1.55 var(--body); }
+a { color: var(--accent); }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(30px, 4.6vw, 52px); line-height: 1.02; font-weight: 800; letter-spacing: -0.02em; }
+h2 { font-size: 24px; font-weight: 700; letter-spacing: -0.01em; }
+h3 { font-size: 17px; font-weight: 700; }
+p { margin: 0; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 28px 20px 60px; display: grid; gap: 28px; }
+.entete { display: grid; gap: 12px; max-width: 860px; }
+.entete .regles { font-size: 13px; color: var(--ink-2); display: flex; flex-wrap: wrap; gap: 6px 14px; }
+.entete .regles span { white-space: nowrap; }
+.lede { font-size: 17px; color: var(--ink-2); max-width: 65ch; }
+.grille { display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 28px; align-items: start; }
+@media (max-width: 920px) { .grille { grid-template-columns: 1fr; } }
+.saisie { position: sticky; top: 16px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; display: grid; gap: 16px; }
+@media (max-width: 920px) { .saisie { position: static; } }
+.champ { display: grid; gap: 6px; }
+.champ > label, .champ > .lbl { font-weight: 600; font-size: 14px; }
+.aide { font-size: 12.5px; color: var(--muted); }
+input[type="number"], select { width: 100%; font: inherit; color: var(--ink); background: var(--paper); border: 1px solid var(--axis); border-radius: 8px; padding: 8px 10px; font-variant-numeric: tabular-nums; }
+input[type="range"] { width: 100%; accent-color: var(--accent); }
+.gros { font-family: var(--display); font-size: 26px; font-weight: 700; padding: 6px 10px; }
+.segment { position: relative; display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--axis); border-radius: 8px; overflow: hidden; }
+.segment input { position: absolute; opacity: 0; pointer-events: none; }
+.segment label { text-align: center; padding: 8px 6px; cursor: pointer; font-size: 14px; }
+.segment input:checked + label { background: var(--accent); color: var(--card); font-weight: 600; }
+.segment input:focus-visible + label { outline: 2px solid var(--accent); outline-offset: -4px; }
+.coche { display: grid; grid-template-columns: 18px 1fr; gap: 8px; align-items: start; font-size: 14px; cursor: pointer; }
+.coche input { margin: 3px 0 0; accent-color: var(--accent); width: 16px; height: 16px; }
+details.avance { border-top: 1px solid var(--line); padding-top: 12px; }
+details.avance summary { cursor: pointer; font-weight: 600; font-size: 14px; }
+details.avance .contenu { display: grid; gap: 14px; margin-top: 12px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.resultats { display: grid; gap: 28px; min-width: 0; }
+.carte { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; display: grid; gap: 14px; min-width: 0; }
+.verdict h2 { font-size: clamp(22px, 2.6vw, 30px); line-height: 1.2; }
+.surligne { background: linear-gradient(transparent 58%, var(--mark) 58%); padding: 0 2px; }
+.classement { display: grid; grid-template-columns: repeat(auto-fit, minmax(178px, 1fr)); gap: 12px; }
+.struct { border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; display: grid; gap: 8px; align-content: start; background: var(--card); position: relative; }
+.struct.gagnant { border: 2px solid var(--ink); padding: 13px; }
+.struct .tete { display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 14px; }
+.pastille { width: 12px; height: 12px; border-radius: 3px; flex: none; }
+.rang { margin-left: auto; font-size: 12px; color: var(--muted); font-weight: 500; }
+.struct .montant { font-family: var(--display); font-size: 28px; font-weight: 700; line-height: 1.1; }
+.struct .ecart { font-size: 13px; color: var(--ink-2); }
+.struct .repart { font-size: 13px; color: var(--ink-2); }
+.puces { display: flex; flex-wrap: wrap; gap: 6px; }
+.puce { font-size: 12px; border-radius: 999px; padding: 2px 9px; border: 1px solid var(--line); color: var(--ink-2); white-space: nowrap; }
+.puce.ok::before { content: "✓ "; color: var(--good); font-weight: 700; }
+.puce.ko::before { content: "✕ "; color: var(--bad); font-weight: 700; }
+.note { font-size: 13px; color: var(--ink-2); max-width: 75ch; }
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: right; padding: 7px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; font-variant-numeric: tabular-nums; }
+th:first-child, td:first-child { text-align: left; white-space: normal; min-width: 170px; }
+table.souple td, table.souple th { white-space: normal; min-width: 120px; }
+thead th { font-weight: 600; font-size: 13px; color: var(--ink-2); vertical-align: bottom; }
+thead th .pastille { display: inline-block; margin-right: 6px; vertical-align: -1px; }
+tr.total td { font-weight: 700; border-top: 2px solid var(--ink); }
+tr.sous td { color: var(--ink-2); font-size: 13px; }
+td.best { background: var(--accent-soft); }
+.graph { position: relative; }
+.graph svg { display: block; width: 100%; height: auto; }
+.graph svg text { font-family: var(--body); }
+.legende { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--ink-2); }
+.legende span { display: inline-flex; align-items: center; gap: 6px; }
+.cle { width: 18px; height: 2px; border-radius: 2px; display: inline-block; }
+.infobulle { position: absolute; pointer-events: none; background: var(--card); border: 1px solid var(--axis); border-radius: 8px; padding: 8px 10px; font-size: 13px; box-shadow: 0 4px 16px rgba(0,0,0,.12); min-width: 190px; display: none; z-index: 2; }
+.infobulle .titre { color: var(--ink-2); font-size: 12px; margin-bottom: 4px; }
+.infobulle .ligne { display: grid; grid-template-columns: 16px auto 1fr; gap: 6px; align-items: center; }
+.infobulle .ligne b { font-variant-numeric: tabular-nums; }
+.infobulle .ligne span:last-child { color: var(--ink-2); }
+.bascules { display: grid; gap: 6px; font-size: 14px; }
+.bascules li { margin-left: 18px; }
+.zones { display: flex; height: 28px; border-radius: 6px; overflow: hidden; gap: 2px; }
+.zones div { display: flex; align-items: center; padding: 0 6px; font-size: 12px; color: #fff; white-space: nowrap; overflow: hidden; min-width: 0; }
+details.donnees summary { cursor: pointer; font-size: 13px; color: var(--accent); }
+details.donnees .table-wrap { margin-top: 8px; max-height: 360px; overflow: auto; }
+.pied { font-size: 13px; color: var(--ink-2); display: grid; gap: 10px; max-width: 900px; }
+.pied ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.avert { border-left: 3px solid var(--accent); padding: 8px 12px; background: var(--card); }
+@media (prefers-reduced-motion: no-preference) {
+  .struct { transition: border-color .2s; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="entete">
+    <div class="regles"><span>Règles 2026</span><span>PASS 48 060 €</span><span>PFU 31,4 %</span><span>IS 15 % jusqu'à 42 500 €</span><span>Réforme de l'assiette des indépendants incluse</span></div>
+    <h1>Quel statut laisse le plus d'argent dans votre poche ?</h1>
+    <p class="lede">EI, EURL ou SASU, à l'IR ou à l'IS : saisissez votre bénéfice, le simulateur cherche pour chaque structure le meilleur dosage salaire / dividendes, puis compare ce qui vous reste après cotisations, impôts et prélèvements sociaux, et ce que vos cotisations vous ouvrent comme droits.</p>
+  </header>
+
+  <div class="grille">
+    <form class="saisie" id="form" autocomplete="off">
+      <div class="champ">
+        <label for="benefice">Bénéfice annuel avant votre rémunération</label>
+        <input class="gros" type="number" id="benefice" min="5000" max="1000000" step="1000" value="180000" inputmode="numeric">
+        <input type="range" id="beneficeRange" min="10000" max="500000" step="2500" value="180000" aria-label="Bénéfice annuel (curseur)">
+        <span class="aide">Chiffre d'affaires moins les charges, hors rémunération et cotisations du dirigeant.</span>
+      </div>
+      <div class="champ">
+        <span class="lbl" id="lblFoyer">Foyer fiscal</span>
+        <div class="segment" role="radiogroup" aria-labelledby="lblFoyer">
+          <input type="radio" name="foyer" id="foyerSeul" value="seul" checked><label for="foyerSeul">Célibataire</label>
+          <input type="radio" name="foyer" id="foyerCouple" value="couple"><label for="foyerCouple">Couple marié / pacsé</label>
+        </div>
+      </div>
+      <div class="champ">
+        <label for="enfants">Enfants à charge</label>
+        <input type="number" id="enfants" min="0" max="8" step="1" value="0">
+      </div>
+      <div class="champ">
+        <label for="autres">Autres revenus imposables du foyer (€/an)</label>
+        <input type="number" id="autres" min="0" step="1000" value="0">
+        <span class="aide">Par exemple le salaire du conjoint, net imposable après abattement de 10 %.</span>
+      </div>
+      <label class="coche"><input type="checkbox" id="conjointActif"><span>Mon conjoint a des revenus d'activité d'au moins 9 612 €/an <span class="aide">(cela écarte la taxe PUMa)</span></span></label>
+      <div class="champ">
+        <label for="plancher">Salaire minimum imposé en SASU</label>
+        <select id="plancher">
+          <option value="0">Aucun : l'optimum pur</option>
+          <option value="7212">4 trimestres de retraite (7 212 € brut)</option>
+          <option value="24990">Indemnités journalières et invalidité (24 990 € brut)</option>
+          <option value="48060">1 PASS, retraite de base maximale (48 060 € brut)</option>
+        </select>
+        <span class="aide">Pour comparer à protection sociale comparable.</span>
+      </div>
+      <label class="coche"><input type="checkbox" id="sasuIR" checked><span>Afficher la SASU à l'IR <span class="aide">(option possible 5 exercices au plus, société de moins de 5 ans)</span></span></label>
+      <details class="avance">
+        <summary>Hypothèses avancées</summary>
+        <div class="contenu">
+          <div class="champ">
+            <label for="capital">EURL : capital + primes + comptes courants (€)</label>
+            <input type="number" id="capital" min="0" step="500" value="1000">
+            <span class="aide">Les dividendes au-delà de 10 % de ce montant subissent les cotisations TNS.</span>
+          </div>
+          <label class="coche"><input type="checkbox" id="prudent"><span>EURL, variante prudente : cotisations sur dividendes payées par le gérant, non déductibles</span></label>
+          <div class="champ">
+            <label for="atmp">SASU : taux AT/MP (%)</label>
+            <input type="number" id="atmp" min="0" max="10" step="0.01" value="1.25">
+            <span class="aide">1,25 % pour le code risque 70.3AD (agences immobilières) en 2026.</span>
+          </div>
+          <label class="coche"><input type="checkbox" id="prevoyance" checked><span>SASU : prévoyance cadre 1,50 % sur la tranche 1</span></label>
+          <label class="coche"><input type="checkbox" id="artisan"><span>Activité artisanale (formation professionnelle 0,29 %)</span></label>
+        </div>
+      </details>
+    </form>
+
+    <main class="resultats" id="resultats">
+      <section class="carte verdict" aria-live="polite">
+        <h2 id="verdict">Calcul en cours…</h2>
+        <div class="classement" id="classement"></div>
+        <p class="note">Chaque structure est optimisée séparément : le simulateur teste toutes les répartitions entre rémunération et dividendes (ou quote-part de bénéfice) et retient celle qui maximise votre revenu disponible. Tout le bénéfice disponible est versé dans l'année.</p>
+      </section>
+
+      <section class="carte">
+        <h2>Le détail, ligne à ligne</h2>
+        <div class="table-wrap"><table id="tableDetail"></table></div>
+        <p class="note">Revenu disponible = rémunération nette + dividendes ou quote-part, moins prélèvements sociaux, impôt sur le revenu (part attribuable à l'activité, CEHR et CDHR comprises) et taxe PUMa éventuelle.</p>
+      </section>
+
+      <section class="carte">
+        <h2>Et si votre bénéfice change ?</h2>
+        <p class="note">Gain de revenu disponible de chaque structure par rapport à l'EI / EURL à l'IR, pour votre foyer. Survolez ou utilisez les flèches du clavier sur le graphique.</p>
+        <div class="legende" id="legende1"></div>
+        <div class="graph" id="graph1"></div>
+        <div>
+          <h3 style="margin-bottom:8px">Meilleure structure selon le bénéfice</h3>
+          <div class="zones" id="zones" aria-hidden="true"></div>
+          <ul class="bascules" id="bascules"></ul>
+        </div>
+        <details class="donnees"><summary>Voir les données en tableau</summary><div class="table-wrap"><table id="table1"></table></div></details>
+      </section>
+
+      <section class="carte">
+        <h2>Salaire ou dividendes : le bon dosage</h2>
+        <p class="note" id="noteDosage"></p>
+        <div class="legende" id="legende2"></div>
+        <div class="graph" id="graph2"></div>
+        <details class="donnees"><summary>Voir les données en tableau</summary><div class="table-wrap"><table id="table2"></table></div></details>
+      </section>
+
+      <section class="carte">
+        <h2>Ce que vos cotisations vous ouvrent</h2>
+        <div class="table-wrap"><table id="tableProtection" class="souple"></table></div>
+        <p class="note">Pension « carrière complète » : ordre de grandeur de la pension annuelle brute si ce schéma était maintenu 43 ans (base = 50 % du revenu retenu, plafonné au PASS ; complémentaire = points annuels × 43 × valeur de service 2026). Les assimilés salariés n'ont pas d'assurance chômage ; les indépendants non plus, hors allocation des travailleurs indépendants en cas de liquidation.</p>
+      </section>
+
+      <footer class="pied">
+        <h3>Hypothèses, limites et sources</h3>
+        <ul>
+          <li>Cotisations calculées selon les barèmes 2026 et vérifiées contre les moteurs officiels de l'Urssaf (modele-ti 0.1.0 pour les indépendants, réforme de l'assiette incluse ; modele-social 11.1.0 pour les assimilés salariés) : écart inférieur à 0,05 %.</li>
+          <li>Impôt sur le revenu : barème de la loi de finances pour 2026 (tranches 11 600 / 29 579 / 84 577 / 181 917 €), quotient familial, décote, abattement de 10 % (plafond 14 555 €), CEHR. La CDHR (taux minimal de 20 % au-delà de 250 000 € de RFR) est estimée de façon simplifiée.</li>
+          <li>Dividendes : PFU 31,4 % (12,8 % + 18,6 % de prélèvements sociaux depuis la LFSS 2026) ou barème avec abattement de 40 %, le plus favorable étant retenu. En EURL, la part au-delà de 10 % du capital et des comptes courants supporte les cotisations TNS (art. L131-6 CSS).</li>
+          <li>SASU à l'IR : bénéfice soumis aux prélèvements sociaux de 18,6 % selon la réponse ministérielle n° 12673 (JO du 2 juin 2026), position contestée par une partie de la doctrine. CSG déductible de 6,8 % prise en compte en régime de croisière.</li>
+          <li>Taxe PUMa (cotisation subsidiaire maladie, art. L380-2 CSS) : 6,5 % des revenus du capital au-delà de 50 % du PASS, réduite linéairement quand les revenus d'activité approchent 20 % du PASS.</li>
+          <li>Non pris en compte : frais de fonctionnement des sociétés (comptabilité, juridique), CFE, épargne retraite (PER, Madelin), frais réels, mutuelle, mise en réserve du bénéfice, revenus exceptionnels.</li>
+        </ul>
+        <p class="avert">Outil pédagogique, à visée informative. Il ne constitue ni un conseil fiscal ou juridique, ni une recommandation personnalisée. Les règles évoluent chaque année (la loi de finances pour 2027 n'est pas encore adoptée) : faites valider votre situation par un expert-comptable ou un avocat fiscaliste avant de décider.</p>
+      </footer>
+    </main>
+  </div>
+</div>
+
+<script>
+window.Moteur = (function () {
+'use strict'
+/*
+ * Moteur de comparaison des statuts du dirigeant (France, règles 2026)
+ * ---------------------------------------------------------------------
+ * EI / EURL à l'IR, EURL à l'IS, SASU à l'IS, SASU à l'IR (option 239 bis AB),
+ * et combinaisons de deux structures.
+ *
+ * Aucune dépendance. Utilisable en Node (ESM) et dans le navigateur.
+ * Les cotisations sont calibrées sur les moteurs officiels de l'Urssaf
+ * (paquets npm « modele-ti » 0.1.0 pour les indépendants, réforme 2026 incluse,
+ * et « modele-social » 11.1.0 pour les assimilés salariés) : voir
+ * scripts/valider-urssaf.mjs.
+ *
+ * Convention : tous les montants sont annuels, en euros.
+ */
+
+// ---------------------------------------------------------------------------
+// 1. Paramètres 2026
+// ---------------------------------------------------------------------------
+const PARAMS_2026 = {
+  annee: 2026,
+  PASS: 48060, // arrêté du 22/12/2025 (4 005 €/mois)
+  SMIC_H_JANVIER: 12.02, // SMIC horaire au 1er janvier 2026 (trimestres, assiettes minimales)
+  SMIC_H: 12.31, // SMIC horaire depuis le 1er juin 2026 (revalorisation automatique +2,41 %)
+
+  // Impôt sur le revenu : barème de la loi de finances pour 2026 (revenus 2025),
+  // utilisé comme approximation pour les revenus 2026 (LF 2027 non adoptée au 07/11/2026).
+  IR_TRANCHES: [
+    { plafond: 11600, taux: 0 },
+    { plafond: 29579, taux: 0.11 },
+    { plafond: 84577, taux: 0.3 },
+    { plafond: 181917, taux: 0.41 },
+    { plafond: Infinity, taux: 0.45 },
+  ],
+  QF_PLAFOND_DEMI_PART: 1807,
+  DECOTE_SEUL: 897,
+  DECOTE_COUPLE: 1483,
+  DECOTE_TAUX: 0.4525,
+  ABATTEMENT_10_MIN: 509,
+  ABATTEMENT_10_MAX: 14555,
+  CEHR_SEUIL_SEUL: 250000,
+  CEHR_SEUIL_COUPLE: 500000,
+  CDHR_TAUX: 0.2,
+  CDHR_DECOTE_TAUX: 0.825, // approximation (art. 224 CGI), voir docs
+  CDHR_FIN_DECOTE_SEUL: 330000,
+  CDHR_FIN_DECOTE_COUPLE: 660000,
+
+  // Revenus de capitaux mobiliers (LFSS 2026 art. 12 : CSG 9,2 % -> 10,6 %)
+  PFU_IR: 0.128,
+  PS_CAPITAL: 0.186, // CSG 10,6 % + CRDS 0,5 % + prélèvement de solidarité 7,5 %
+  CSG_DEDUCTIBLE_CAPITAL: 0.068,
+  ABATTEMENT_DIVIDENDES: 0.4,
+
+  // Cotisation subsidiaire maladie (« taxe PUMa »), art. L380-2 et D380-1 CSS
+  CSM_TAUX: 0.065,
+  CSM_SEUIL_ACTIVITE: 0.2, // x PASS
+  CSM_ABATTEMENT_CAPITAL: 0.5, // x PASS
+  CSM_PLAFOND_ASSIETTE: 8, // x PASS
+
+  // Impôt sur les sociétés (art. 219 CGI)
+  IS_TAUX_REDUIT: 0.15,
+  IS_SEUIL_REDUIT: 42500,
+  IS_TAUX_NORMAL: 0.25,
+
+  // Retraite et prestations
+  AGIRC_ARRCO_PRIX_ACHAT: 20.1877,
+  AGIRC_ARRCO_VALEUR_SERVICE: 1.4386,
+  RCI_PRIX_ACHAT: 21.726,
+  RCI_VALEUR_SERVICE: 1.347,
+  CAPITAL_DECES_REGIME_GENERAL: 3681, // valeur retenue par le simulateur Urssaf
+  DUREE_CARRIERE_ANNEES: 43, // 172 trimestres (générations 1965 et suivantes)
+}
+
+// ---------------------------------------------------------------------------
+// 2. Outils
+// ---------------------------------------------------------------------------
+const clamp = (x, a, b) => Math.min(Math.max(x, a), b)
+const pos = (x) => (x > 0 ? x : 0)
+const r2 = (x) => Math.round(x * 100) / 100
+
+/** Mécanisme « taux progressif » de publicodes : interpolation linéaire entre paliers. */
+function tauxProgressif(x, paliers) {
+  if (x < paliers[0][0]) return paliers[0][1]
+  for (let i = 1; i < paliers.length; i++) {
+    const [p0, t0] = paliers[i - 1]
+    const [p1, t1] = paliers[i]
+    if (x < p1) return t0 + ((x - p0) / (p1 - p0)) * (t1 - t0)
+  }
+  return paliers[paliers.length - 1][1]
+}
+
+function impotSocietes(benefice, P = PARAMS_2026) {
+  const b = pos(benefice)
+  return (
+    P.IS_TAUX_REDUIT * Math.min(b, P.IS_SEUIL_REDUIT) +
+    P.IS_TAUX_NORMAL * pos(b - P.IS_SEUIL_REDUIT)
+  )
+}
+
+// ---------------------------------------------------------------------------
+// 3. Cotisations du travailleur indépendant (SSI) : réforme de l'assiette 2025/2026
+//    Décret n° 2024-688 du 5 juillet 2024 ; art. L131-6 et D613-1 s. CSS.
+//    Activité commerciale ou libérale non réglementée (régime SSI).
+// ---------------------------------------------------------------------------
+function cotisationsTNS(revenuBrut, P = PARAMS_2026, opts = {}) {
+  const PASS = P.PASS
+  const rb = pos(revenuBrut)
+  // Assiette unique : revenu brut abattu de 26 % (abattement compris entre 1,76 % et 130 % du PASS)
+  const abattement = clamp(0.26 * rb, 0.0176 * PASS, 1.3 * PASS)
+  const assiette = pos(rb - abattement)
+
+  // Maladie-maternité : taux progressif jusqu'à 3 PASS, 6,5 % au-delà
+  const tauxMaladie =
+    Math.round(
+      tauxProgressif(assiette / PASS, [
+        [0.2, 0],
+        [0.4, 1.5],
+        [0.6, 4],
+        [1.1, 6.5],
+        [2, 7.7],
+        [3, 8.5],
+      ]) * 100,
+    ) / 10000
+  const maladie = tauxMaladie * Math.min(assiette, 3 * PASS) + 0.065 * pos(assiette - 3 * PASS)
+
+  // Indemnités journalières : 0,5 % (assiette minimale 40 % PASS, plafond 5 PASS)
+  const ij = 0.005 * clamp(assiette, 0.4 * PASS, 5 * PASS)
+
+  // Allocations familiales : 0 % jusqu'à 110 % PASS, progressif jusqu'à 3,1 % à 140 % PASS
+  const tauxAF =
+    Math.round(
+      tauxProgressif(assiette / PASS, [
+        [1.1, 0],
+        [1.4, 3.1],
+      ]) * 100,
+    ) / 10000
+  const allocationsFamiliales = tauxAF * assiette
+
+  // Retraite de base : 17,87 % jusqu'au PASS, 0,72 % au-delà (assiette minimale 450 h SMIC)
+  const assietteRetraite = Math.max(assiette, 450 * P.SMIC_H_JANVIER)
+  const retraiteBase = 0.1787 * Math.min(assietteRetraite, PASS) + 0.0072 * pos(assietteRetraite - PASS)
+
+  // Retraite complémentaire (RCI) : 8,1 % jusqu'au PASS, 9,1 % de 1 à 4 PASS
+  const retraiteComplementaire =
+    0.081 * Math.min(assiette, PASS) + 0.091 * pos(Math.min(assiette, 4 * PASS) - PASS)
+
+  // Invalidité-décès : 1,3 % (assiette entre 11,5 % PASS et 1 PASS)
+  const invaliditeDeces = 0.013 * clamp(assiette, 0.115 * PASS, PASS)
+
+  // CSG-CRDS : 9,7 % dont 6,8 % déductible, 2,9 % non déductible (CSG 2,4 % + CRDS 0,5 %)
+  const csgDeductible = 0.068 * assiette
+  const csgNonDeductible = 0.029 * assiette
+
+  // Contribution à la formation professionnelle
+  const cfp = (opts.artisan ? 0.0029 : 0.0025) * PASS
+
+  const cotisationsSociales =
+    maladie + ij + allocationsFamiliales + retraiteBase + retraiteComplementaire + invaliditeDeces
+  const total = cotisationsSociales + csgDeductible + csgNonDeductible + cfp
+
+  return {
+    revenuBrut: rb,
+    abattement,
+    assiette,
+    maladie,
+    ij,
+    allocationsFamiliales,
+    retraiteBase,
+    retraiteComplementaire,
+    invaliditeDeces,
+    csgDeductible,
+    csgNonDeductible,
+    cfp,
+    total,
+    tauxMaladie,
+    tauxAF,
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 4. Cotisations de l'assimilé salarié (président de SAS/SASU sans contrat de travail)
+//    Pas d'assurance chômage ni AGS ; pas de RGDU (réservée aux rémunérations
+//    soumises à l'assurance chômage) ; taux réduits maladie / famille supprimés
+//    en 2026 (intégrés à la RGDU).
+// ---------------------------------------------------------------------------
+function cotisationsAssimileSalarie(brut, P = PARAMS_2026, opts = {}) {
+  const PASS = P.PASS
+  const S = pos(brut)
+  const T1 = Math.min(S, PASS)
+  const T2 = pos(Math.min(S, 8 * PASS) - PASS)
+  const tauxATMP = opts.tauxATMP ?? 0.0125 // code risque 70.3AD (agences immobilières), 2026
+  const prevoyanceCadre = opts.prevoyanceCadre === false ? 0 : 0.015 * T1
+  const cet = S > PASS ? 0.0035 * Math.min(S, 8 * PASS) : 0
+
+  const employeur = {
+    maladie: 0.13 * S,
+    allocationsFamiliales: 0.0525 * S,
+    vieillessePlafonnee: 0.0855 * T1,
+    vieillesseDeplafonnee: 0.0211 * S,
+    atmp: tauxATMP * S,
+    fnal: 0.001 * T1,
+    csa: 0.003 * S,
+    formationPro: 0.0055 * S,
+    taxeApprentissage: 0.0068 * S,
+    dialogueSocial: 0.00016 * S,
+    agircArrco: 0.0472 * T1 + 0.1295 * T2,
+    ceg: 0.0129 * T1 + 0.0162 * T2,
+    cet: cet * 0.6,
+    prevoyanceCadre,
+  }
+  const assietteCSG = 0.9825 * Math.min(S, 4 * PASS) + pos(S - 4 * PASS) + prevoyanceCadre
+  const salarie = {
+    vieillessePlafonnee: 0.069 * T1,
+    vieillesseDeplafonnee: 0.004 * S,
+    agircArrco: 0.0315 * T1 + 0.0864 * T2,
+    ceg: 0.0086 * T1 + 0.0108 * T2,
+    cet: cet * 0.4,
+    csgDeductible: 0.068 * assietteCSG,
+    csgNonDeductible: 0.024 * assietteCSG,
+    crds: 0.005 * assietteCSG,
+  }
+  const sum = (o) => Object.values(o).reduce((a, b) => a + b, 0)
+  const totalEmployeur = sum(employeur)
+  const totalSalarie = sum(salarie)
+  const net = S - totalSalarie
+  // Net imposable : on réintègre CSG non déductible + CRDS (la prévoyance « décès-invalidité »
+  // patronale reste exonérée d'IR dans les limites de l'art. 83 CGI)
+  const netImposable = net + salarie.csgNonDeductible + salarie.crds
+  return {
+    brut: S,
+    employeur,
+    salarie,
+    totalEmployeur,
+    totalSalarie,
+    coutTotal: S + totalEmployeur,
+    net,
+    netImposable,
+    pointsAgircArrco: (0.062 * T1 + 0.17 * T2) / P.AGIRC_ARRCO_PRIX_ACHAT,
+  }
+}
+
+/** Inverse : salaire brut tel que le coût total employeur = cout (bissection). */
+function brutDepuisCout(cout, P = PARAMS_2026, opts = {}) {
+  if (cout <= 0) return 0
+  let lo = 0
+  let hi = cout
+  for (let i = 0; i < 60; i++) {
+    const mid = (lo + hi) / 2
+    if (cotisationsAssimileSalarie(mid, P, opts).coutTotal > cout) hi = mid
+    else lo = mid
+  }
+  return lo
+}
+
+// ---------------------------------------------------------------------------
+// 5. Impôt sur le revenu du foyer
+// ---------------------------------------------------------------------------
+function nombreDeParts(foyer) {
+  const base = foyer.couple ? 2 : 1
+  const n = foyer.enfants || 0
+  const enfants = n <= 2 ? 0.5 * n : 1 + (n - 2)
+  return base + enfants
+}
+
+function baremeIR(revenuParPart, P) {
+  let impot = 0
+  let bas = 0
+  for (const t of P.IR_TRANCHES) {
+    if (revenuParPart > bas) impot += (Math.min(revenuParPart, t.plafond) - bas) * t.taux
+    bas = t.plafond
+  }
+  return impot
+}
+
+function tauxMarginal(revenuParPart, P = PARAMS_2026) {
+  let bas = 0
+  for (const t of P.IR_TRANCHES) {
+    if (revenuParPart < t.plafond) return t.taux
+    bas = t.plafond
+  }
+  return P.IR_TRANCHES[P.IR_TRANCHES.length - 1].taux
+}
+
+/**
+ * @param revenuImposable revenu net global imposable au barème (après abattements)
+ * @param montantPFU revenus soumis au PFU (taxés à 12,8 %)
+ * @param rfrSupplement montants à ajouter au RFR (abattement 40 % réintégré, etc.)
+ */
+function impotRevenu({ revenuImposable, montantPFU = 0, rfrSupplement = 0 }, foyer, P = PARAMS_2026) {
+  const parts = nombreDeParts(foyer)
+  const partsBase = foyer.couple ? 2 : 1
+  const R = pos(revenuImposable)
+  const impotAvecQF = parts * baremeIR(R / parts, P)
+  const impotSansQF = partsBase * baremeIR(R / partsBase, P)
+  const demiPartsSupp = (parts - partsBase) * 2
+  const impotBrut = Math.max(impotAvecQF, impotSansQF - demiPartsSupp * P.QF_PLAFOND_DEMI_PART)
+  const seuilDecote = foyer.couple ? P.DECOTE_COUPLE : P.DECOTE_SEUL
+  const decote = Math.min(impotBrut, pos(seuilDecote - P.DECOTE_TAUX * impotBrut))
+  const impotBareme = impotBrut - decote
+  const pfu = P.PFU_IR * montantPFU
+  const rfr = R + montantPFU + rfrSupplement
+  const s = foyer.couple ? P.CEHR_SEUIL_COUPLE : P.CEHR_SEUIL_SEUL
+  const cehr = 0.03 * pos(Math.min(rfr, 2 * s) - s) + 0.04 * pos(rfr - 2 * s)
+  let cdhr = 0
+  if (rfr > s) {
+    const finDecote = foyer.couple ? P.CDHR_FIN_DECOTE_COUPLE : P.CDHR_FIN_DECOTE_SEUL
+    let base = P.CDHR_TAUX * rfr - (impotBareme + pfu + cehr)
+    if (rfr < finDecote) base -= P.CDHR_DECOTE_TAUX * (finDecote - rfr)
+    cdhr = pos(base)
+  }
+  const total = impotBareme + pfu + cehr + cdhr
+  return {
+    parts,
+    impotBrut,
+    decote,
+    impotBareme,
+    pfu,
+    cehr,
+    cdhr,
+    total,
+    rfr,
+    tmi: tauxMarginal(R / parts, P),
+  }
+}
+
+function abattement10(montant, P) {
+  if (montant <= 0) return 0
+  return clamp(0.1 * montant, Math.min(P.ABATTEMENT_10_MIN, montant), P.ABATTEMENT_10_MAX)
+}
+
+/** Cotisation subsidiaire maladie (taxe PUMa). */
+function cotisationSubsidiaireMaladie(revenusActivite, revenusCapital, foyer, P = PARAMS_2026) {
+  const PASS = P.PASS
+  if (foyer.conjointActif) return 0 // le conjoint a des revenus d'activité > 20 % PASS
+  const seuil = P.CSM_SEUIL_ACTIVITE * PASS
+  if (revenusActivite >= seuil) return 0
+  const assiette = pos(Math.min(revenusCapital, P.CSM_PLAFOND_ASSIETTE * PASS) - P.CSM_ABATTEMENT_CAPITAL * PASS)
+  return P.CSM_TAUX * assiette * (1 - pos(revenusActivite) / seuil)
+}
+
+// ---------------------------------------------------------------------------
+// 6. Protection sociale acquise (indicateurs annuels)
+// ---------------------------------------------------------------------------
+function trimestres(revenuValidant, P) {
+  return clamp(Math.floor(revenuValidant / (150 * P.SMIC_H_JANVIER)), 0, 4)
+}
+
+function protectionAssimileSalarie(brut, P = PARAMS_2026, opts = {}) {
+  const PASS = P.PASS
+  const c = cotisationsAssimileSalarie(brut, P, opts)
+  const smicAnnuel = (P.SMIC_H * 151.67 * 12)
+  const conditionIJ = brut >= 2030 * P.SMIC_H // cotisations sur 2 030 h SMIC sur 12 mois
+  const ij = conditionIJ ? 0.5 * Math.min(brut / 365, (1.4 * smicAnnuel) / 365) : 0
+  const pensionComplParAn = c.pointsAgircArrco * P.AGIRC_ARRCO_VALEUR_SERVICE
+  const baseRevenu = Math.min(brut, PASS)
+  return {
+    regime: 'Régime général (assimilé salarié)',
+    trimestres: trimestres(brut, P),
+    revenuRetraiteBase: baseRevenu,
+    pointsComplementaire: c.pointsAgircArrco,
+    caisseComplementaire: 'Agirc-Arrco',
+    pensionAnnuelleAcquiseParAn: (0.5 * baseRevenu) / P.DUREE_CARRIERE_ANNEES + pensionComplParAn,
+    pensionCarriereComplete: 0.5 * baseRevenu + pensionComplParAn * P.DUREE_CARRIERE_ANNEES,
+    ijJour: ij,
+    invaliditeTotaleAn: conditionIJ ? 0.5 * baseRevenu : 0,
+    capitalDeces: brut > 0 ? P.CAPITAL_DECES_REGIME_GENERAL : 0,
+    prevoyanceCadre: opts.prevoyanceCadre !== false && brut > 0,
+  }
+}
+
+function protectionTNS(revenuBrut, P = PARAMS_2026) {
+  const PASS = P.PASS
+  const c = cotisationsTNS(revenuBrut, P)
+  const assiette = c.assiette
+  const assietteRetraite = Math.max(assiette, 450 * P.SMIC_H_JANVIER)
+  const condition = assiette >= 0.1 * PASS
+  const points = c.retraiteComplementaire / P.RCI_PRIX_ACHAT
+  const pensionComplParAn = points * P.RCI_VALEUR_SERVICE
+  const baseRevenu = Math.min(assietteRetraite, PASS)
+  return {
+    regime: 'Sécurité sociale des indépendants',
+    trimestres: trimestres(assietteRetraite, P),
+    revenuRetraiteBase: baseRevenu,
+    pointsComplementaire: points,
+    caisseComplementaire: 'RCI',
+    pensionAnnuelleAcquiseParAn: (0.5 * baseRevenu) / P.DUREE_CARRIERE_ANNEES + pensionComplParAn,
+    pensionCarriereComplete: 0.5 * baseRevenu + pensionComplParAn * P.DUREE_CARRIERE_ANNEES,
+    ijJour: condition ? Math.min(assiette, PASS) / 730 : 0,
+    invaliditeTotaleAn: condition ? 0.5 * Math.min(assiette, PASS) : 0,
+    capitalDeces: condition ? 0.2 * PASS : 0,
+    prevoyanceCadre: false,
+  }
+}
+
+const AUCUNE_PROTECTION = {
+  regime: 'Aucune (PUMa : frais de santé uniquement)',
+  trimestres: 0,
+  revenuRetraiteBase: 0,
+  pointsComplementaire: 0,
+  caisseComplementaire: '-',
+  pensionAnnuelleAcquiseParAn: 0,
+  pensionCarriereComplete: 0,
+  ijJour: 0,
+  invaliditeTotaleAn: 0,
+  capitalDeces: 0,
+  prevoyanceCadre: false,
+}
+
+// ---------------------------------------------------------------------------
+// 7. Scénarios « une structure »
+//    benefice = bénéfice avant rémunération du dirigeant (CA - charges, hors dirigeant)
+//    foyer = { couple, enfants, autresRevenusImposables, conjointActif }
+//    Tout le bénéfice disponible est distribué (objectif : revenu disponible de l'année).
+// ---------------------------------------------------------------------------
+
+/** Assemble la fiscalité personnelle à partir des flux bruts de l'année. */
+function fiscalitePersonnelle(flux, foyer, P, modeDividendes) {
+  // flux : { revenuActiviteImposable (avant abattement 10 %), abattable (bool),
+  //          revenuProfessionnelBICBNC, dividendes, dividendesSoumisPS,
+  //          beneficeSASUIR, revenusActiviteCSM, revenusCapitalCSM }
+  const autres = foyer.autresRevenusImposables || 0
+  const salaires = flux.revenuActiviteImposable || 0
+  const salairesNets = salaires - abattement10(salaires, P)
+  const bicbnc = flux.revenuProfessionnelBICBNC || 0
+  const quotePartIR = flux.beneficeSASUIR || 0
+  // CSG déductible sur la quote-part SASU IR (revenus du patrimoine), déduite en régime de croisière
+  const csgDedPatrimoine = P.CSG_DEDUCTIBLE_CAPITAL * quotePartIR
+  const D = flux.dividendes || 0
+  const Dps = flux.dividendesSoumisPS || 0
+  const psDividendes = P.PS_CAPITAL * Dps
+  const psQuotePart = P.PS_CAPITAL * quotePartIR
+
+  const base = salairesNets + bicbnc + quotePartIR - csgDedPatrimoine + autres
+  const ir0 = impotRevenu({ revenuImposable: base }, foyer, P)
+
+  let res
+  const essais = []
+  if (D > 0 && modeDividendes !== 'bareme') {
+    const ir = impotRevenu({ revenuImposable: base, montantPFU: D }, foyer, P)
+    essais.push({ mode: 'PFU', ir })
+  }
+  if (D > 0 && modeDividendes !== 'pfu') {
+    const imposables = (1 - P.ABATTEMENT_DIVIDENDES) * D - P.CSG_DEDUCTIBLE_CAPITAL * Dps
+    const ir = impotRevenu(
+      { revenuImposable: base + imposables, rfrSupplement: P.ABATTEMENT_DIVIDENDES * D },
+      foyer,
+      P,
+    )
+    essais.push({ mode: 'barème', ir })
+  }
+  if (essais.length === 0) res = { mode: '-', ir: ir0 }
+  else res = essais.reduce((a, b) => (a.ir.total <= b.ir.total ? a : b))
+
+  // Impôt « attribuable » à l'activité = impôt du foyer - impôt sur les autres revenus seuls
+  const irAutres = autres > 0 ? impotRevenu({ revenuImposable: autres }, foyer, P).total : 0
+  const csm = cotisationSubsidiaireMaladie(
+    flux.revenusActiviteCSM || 0,
+    flux.revenusCapitalCSM || 0,
+    foyer,
+    P,
+  )
+  return {
+    modeDividendes: res.mode,
+    ir: res.ir,
+    impotAttribuable: res.ir.total - irAutres,
+    prelevementsSociauxCapital: psDividendes + psQuotePart,
+    csm,
+  }
+}
+
+function resultat(nom, details) {
+  return { structure: nom, ...details }
+}
+
+/** EI au réel ou EURL à l'IR (gérant associé unique, TNS). */
+function scenarioEURL_IR(benefice, foyer, P = PARAMS_2026, opts = {}) {
+  const c = cotisationsTNS(benefice, P, opts)
+  const revenuPro = benefice - c.total + c.csgNonDeductible // BIC/BNC imposable
+  const f = fiscalitePersonnelle(
+    {
+      revenuProfessionnelBICBNC: revenuPro,
+      revenusActiviteCSM: revenuPro,
+    },
+    foyer,
+    P,
+  )
+  const net = benefice - c.total
+  const disponible = net - f.impotAttribuable - f.csm
+  return resultat('EI / EURL à l\'IR', {
+    benefice,
+    choix: { remuneration: benefice, dividendes: 0 },
+    is: 0,
+    cotisations: c.total,
+    detailCotisations: c,
+    remunerationNette: net,
+    dividendesBruts: 0,
+    prelevementsSociaux: 0,
+    impotRevenu: f.impotAttribuable,
+    detailIR: f.ir,
+    csm: f.csm,
+    modeDividendes: '-',
+    revenuDisponible: disponible,
+    protection: protectionTNS(benefice, P),
+  })
+}
+
+/** EURL à l'IS : rémunération TNS (coût total R) + dividendes. */
+function evaluerEURL_IS(benefice, R, foyer, P = PARAMS_2026, opts = {}) {
+  const capitalEtCCA = opts.capitalEtCCA ?? 1000
+  const reserve = opts.reserve || 0 // bénéfice net laissé en réserve
+  const is = impotSocietes(benefice - R, P)
+  const D = pos(benefice - R - is - reserve)
+  const Dlibre = Math.min(D, 0.1 * capitalEtCCA)
+  const Dsoumis = D - Dlibre
+  const c = cotisationsTNS(R + Dsoumis, P, opts)
+  // Par défaut (pratique courante, et choix du simulateur Urssaf) la société règle l'intégralité
+  // des cotisations du gérant, y compris celles assises sur les dividendes, et les déduit.
+  // Variante prudente : le gérant paie lui-même la part liée aux dividendes (non déductible).
+  const prudent = !!opts.cotisationsDividendesPersonnelles
+  const cR = prudent ? cotisationsTNS(R, P, opts) : c
+  const cotisationsSurDividendes = prudent ? c.total - cR.total : 0
+  if (R < cR.total - 1e-6) return null
+  const remunerationNette = R - cR.total
+  const revenuArt62 = remunerationNette + cR.csgNonDeductible
+  const f = fiscalitePersonnelle(
+    {
+      revenuActiviteImposable: revenuArt62,
+      dividendes: D,
+      dividendesSoumisPS: Dlibre,
+      revenusActiviteCSM: revenuArt62 + Dsoumis,
+      revenusCapitalCSM: Dlibre,
+    },
+    foyer,
+    P,
+    opts.modeDividendes,
+  )
+  const disponible =
+    remunerationNette + D - cotisationsSurDividendes - f.prelevementsSociauxCapital - f.impotAttribuable - f.csm
+  return resultat('EURL à l\'IS', {
+    benefice,
+    choix: { remuneration: R, dividendes: D },
+    is,
+    cotisations: c.total,
+    detailCotisations: c,
+    remunerationNette,
+    dividendesBruts: D,
+    prelevementsSociaux: f.prelevementsSociauxCapital,
+    impotRevenu: f.impotAttribuable,
+    detailIR: f.ir,
+    csm: f.csm,
+    modeDividendes: f.modeDividendes,
+    revenuDisponible: disponible,
+    protection: protectionTNS(R + Dsoumis, P),
+  })
+}
+
+/** SASU à l'IS : salaire (brut S) + dividendes. */
+function evaluerSASU_IS(benefice, S, foyer, P = PARAMS_2026, opts = {}) {
+  const c = cotisationsAssimileSalarie(S, P, opts)
+  if (c.coutTotal > benefice + 1e-6) return null
+  const reserve = opts.reserve || 0
+  const is = impotSocietes(benefice - c.coutTotal, P)
+  const D = pos(benefice - c.coutTotal - is - reserve)
+  const f = fiscalitePersonnelle(
+    {
+      revenuActiviteImposable: c.netImposable,
+      dividendes: D,
+      dividendesSoumisPS: D,
+      revenusActiviteCSM: c.netImposable,
+      revenusCapitalCSM: D,
+    },
+    foyer,
+    P,
+    opts.modeDividendes,
+  )
+  const disponible = c.net + D - f.prelevementsSociauxCapital - f.impotAttribuable - f.csm
+  return resultat('SASU à l\'IS', {
+    benefice,
+    choix: { remuneration: S, dividendes: D },
+    is,
+    cotisations: c.totalEmployeur + c.totalSalarie,
+    detailCotisations: c,
+    remunerationNette: c.net,
+    dividendesBruts: D,
+    prelevementsSociaux: f.prelevementsSociauxCapital,
+    impotRevenu: f.impotAttribuable,
+    detailIR: f.ir,
+    csm: f.csm,
+    modeDividendes: f.modeDividendes,
+    revenuDisponible: disponible,
+    protection: S > 0 ? protectionAssimileSalarie(S, P, opts) : AUCUNE_PROTECTION,
+  })
+}
+
+/** SASU à l'IR (option art. 239 bis AB, 5 exercices max, société de moins de 5 ans). */
+function evaluerSASU_IR(benefice, S, foyer, P = PARAMS_2026, opts = {}) {
+  const c = cotisationsAssimileSalarie(S, P, opts)
+  if (c.coutTotal > benefice + 1e-6) return null
+  const quotePart = benefice - c.coutTotal // imposée à l'IR au nom de l'associé (BIC/BNC)
+  const f = fiscalitePersonnelle(
+    {
+      revenuActiviteImposable: c.netImposable,
+      beneficeSASUIR: quotePart,
+      revenusActiviteCSM: c.netImposable,
+      revenusCapitalCSM: quotePart,
+    },
+    foyer,
+    P,
+  )
+  const disponible = c.net + quotePart - f.prelevementsSociauxCapital - f.impotAttribuable - f.csm
+  return resultat('SASU à l\'IR', {
+    benefice,
+    choix: { remuneration: S, dividendes: 0, quotePart },
+    is: 0,
+    cotisations: c.totalEmployeur + c.totalSalarie,
+    detailCotisations: c,
+    remunerationNette: c.net,
+    dividendesBruts: 0,
+    quotePartBenefice: quotePart,
+    prelevementsSociaux: f.prelevementsSociauxCapital,
+    impotRevenu: f.impotAttribuable,
+    detailIR: f.ir,
+    csm: f.csm,
+    modeDividendes: '-',
+    revenuDisponible: disponible,
+    protection: S > 0 ? protectionAssimileSalarie(S, P, opts) : AUCUNE_PROTECTION,
+  })
+}
+
+// ---------------------------------------------------------------------------
+// 8. Optimisation (recherche par grille puis affinage)
+// ---------------------------------------------------------------------------
+function maximiser(f, a, b, critere, pas0 = 200) {
+  let meilleur = null
+  let xBest = a
+  const essai = (x) => {
+    const r = f(x)
+    if (r && (!meilleur || critere(r) > critere(meilleur))) {
+      meilleur = r
+      xBest = x
+    }
+  }
+  if (b <= a) {
+    essai(a)
+    return meilleur
+  }
+  const n = pas0
+  for (let i = 0; i <= n; i++) essai(a + ((b - a) * i) / n)
+  let h = (b - a) / n
+  for (let k = 0; k < 4; k++) {
+    const lo = Math.max(a, xBest - h)
+    const hi = Math.min(b, xBest + h)
+    for (let i = 0; i <= 40; i++) essai(lo + ((hi - lo) * i) / 40)
+    h = (hi - lo) / 40
+  }
+  return meilleur
+}
+
+/**
+ * Contraintes optionnelles : opts.salaireMin (brut assimilé salarié) ou
+ * opts.revenuBrutTNSMin, pour imposer un niveau de protection sociale.
+ */
+function optimiserSASU_IS(benefice, foyer, P = PARAMS_2026, opts = {}) {
+  const Smax = brutDepuisCout(benefice, P, opts)
+  const Smin = Math.min(opts.salaireMin || 0, Smax)
+  const crit = opts.critere || ((r) => r.revenuDisponible)
+  return maximiser((S) => evaluerSASU_IS(benefice, S, foyer, P, opts), Smin, Smax, crit, opts.pas0 || 200)
+}
+
+function optimiserSASU_IR(benefice, foyer, P = PARAMS_2026, opts = {}) {
+  const Smax = brutDepuisCout(benefice, P, opts)
+  const Smin = Math.min(opts.salaireMin || 0, Smax)
+  const crit = opts.critere || ((r) => r.revenuDisponible)
+  return maximiser((S) => evaluerSASU_IR(benefice, S, foyer, P, opts), Smin, Smax, crit, opts.pas0 || 200)
+}
+
+function optimiserEURL_IS(benefice, foyer, P = PARAMS_2026, opts = {}) {
+  const crit = opts.critere || ((r) => r.revenuDisponible)
+  const Rmin = Math.min(opts.revenuBrutTNSMin || 0, benefice)
+  return maximiser((R) => evaluerEURL_IS(benefice, R, foyer, P, opts), Rmin, benefice, crit, opts.pas0 || 200)
+}
+
+function comparer(benefice, foyer, P = PARAMS_2026, opts = {}) {
+  const r = [
+    scenarioEURL_IR(benefice, foyer, P, opts),
+    optimiserEURL_IS(benefice, foyer, P, opts),
+    optimiserSASU_IS(benefice, foyer, P, opts),
+  ]
+  if (opts.inclureSASU_IR !== false) r.push(optimiserSASU_IR(benefice, foyer, P, opts))
+  return r.filter(Boolean)
+}
+
+// ---------------------------------------------------------------------------
+// 9. Deux structures : le bénéfice total est réparti entre deux activités
+//    (A = structure 1, B = structure 2). L'IR est calculé au niveau du foyer.
+// ---------------------------------------------------------------------------
+function evaluerCombo(beneficeTotal, part1, conf, foyer, P = PARAMS_2026, opts = {}) {
+  // conf : { type: 'EURL_IR+SASU_IS' | 'EURL_IS+SASU_IS' | 'SASU_IS+SASU_IS' }
+  // part1 = bénéfice de la structure 1 ; la structure 2 reçoit le reste.
+  // Variables internes : remunération dans 1 (R1) et salaire dans 2 (S2).
+  const B1 = part1
+  const B2 = beneficeTotal - part1
+  const autres = foyer.autresRevenusImposables || 0
+  return (R1, S2) => {
+    let tns = null
+    let sal1 = null
+    let is1 = 0
+    let D1 = 0
+    let D1soumis = 0
+    let net1 = 0
+    let art62 = 0
+    let bicbnc = 0
+    if (conf.type === 'EURL_IR+SASU_IS') {
+      tns = cotisationsTNS(B1, P, opts)
+      net1 = B1 - tns.total
+      bicbnc = net1 + tns.csgNonDeductible
+    } else if (conf.type === 'EURL_IS+SASU_IS') {
+      is1 = impotSocietes(B1 - R1, P)
+      D1 = pos(B1 - R1 - is1)
+      const Dl = Math.min(D1, 0.1 * (opts.capitalEtCCA ?? 1000))
+      D1soumis = D1 - Dl
+      tns = cotisationsTNS(R1 + D1soumis, P, opts)
+      if (R1 < tns.total) return null
+      net1 = R1 - tns.total
+      art62 = net1 + tns.csgNonDeductible
+    } else if (conf.type === 'SASU_IS+SASU_IS') {
+      sal1 = cotisationsAssimileSalarie(R1, P, opts)
+      if (sal1.coutTotal > B1) return null
+      is1 = impotSocietes(B1 - sal1.coutTotal, P)
+      D1 = pos(B1 - sal1.coutTotal - is1)
+      net1 = sal1.net
+      art62 = sal1.netImposable
+    }
+    const sal2 = cotisationsAssimileSalarie(S2, P, opts)
+    if (sal2.coutTotal > B2) return null
+    const is2 = impotSocietes(B2 - sal2.coutTotal, P)
+    const D2 = pos(B2 - sal2.coutTotal - is2)
+    const D = D1 + D2
+    const Dps = D - D1soumis
+    const salairesImposables = art62 + sal2.netImposable
+    const f = fiscalitePersonnelle(
+      {
+        revenuActiviteImposable: salairesImposables,
+        revenuProfessionnelBICBNC: bicbnc,
+        dividendes: D,
+        dividendesSoumisPS: Dps,
+        revenusActiviteCSM: salairesImposables + bicbnc + D1soumis,
+        revenusCapitalCSM: Dps,
+      },
+      foyer,
+      P,
+      opts.modeDividendes,
+    )
+    const cot = (tns ? tns.total : 0) + (sal1 ? sal1.totalEmployeur + sal1.totalSalarie : 0) + sal2.totalEmployeur + sal2.totalSalarie
+    const disponible = net1 + sal2.net + D - f.prelevementsSociauxCapital - f.impotAttribuable - f.csm
+    const prot = []
+    if (tns) prot.push(protectionTNS(tns.revenuBrut, P))
+    if (sal1 && R1 > 0) prot.push(protectionAssimileSalarie(R1, P, opts))
+    if (S2 > 0) prot.push(protectionAssimileSalarie(S2, P, opts))
+    return {
+      structure: conf.type,
+      benefice: beneficeTotal,
+      choix: { beneficeStructure1: B1, beneficeStructure2: B2, remuneration1: R1, salaire2: S2, dividendes: D },
+      is: is1 + is2,
+      cotisations: cot,
+      prelevementsSociaux: f.prelevementsSociauxCapital,
+      impotRevenu: f.impotAttribuable,
+      detailIR: f.ir,
+      csm: f.csm,
+      modeDividendes: f.modeDividendes,
+      revenuDisponible: disponible,
+      protections: prot,
+    }
+  }
+}
+
+function optimiserCombo(beneficeTotal, type, foyer, P = PARAMS_2026, opts = {}) {
+  const crit = (r) => r.revenuDisponible
+  const pas = opts.pasRepartition || Math.max(1000, beneficeTotal / 60)
+  let meilleur = null
+  for (let B1 = 0; B1 <= beneficeTotal + 1e-6; B1 += pas) {
+    const g = evaluerCombo(beneficeTotal, B1, { type }, foyer, P, opts)
+    const B2 = beneficeTotal - B1
+    const S2max = brutDepuisCout(B2, P, opts)
+    let r
+    if (type === 'EURL_IR+SASU_IS') {
+      r = maximiser((S2) => g(0, S2), 0, S2max, crit, 60)
+    } else {
+      const R1max = type === 'SASU_IS+SASU_IS' ? brutDepuisCout(B1, P, opts) : B1
+      // optimisation alternée sur (R1, S2)
+      let R1 = 0
+      let S2 = 0
+      for (let it = 0; it < 3; it++) {
+        const a = maximiser((x) => g(x, S2), 0, R1max, crit, 40)
+        if (a) R1 = a.choix.remuneration1
+        const b = maximiser((x) => g(R1, x), 0, S2max, crit, 40)
+        if (b) S2 = b.choix.salaire2
+        r = b || a
+      }
+    }
+    if (r && (!meilleur || crit(r) > crit(meilleur))) meilleur = r
+  }
+  return meilleur
+}
+
+
+return { PARAMS_2026, impotSocietes, cotisationsTNS, cotisationsAssimileSalarie, brutDepuisCout, nombreDeParts, tauxMarginal, impotRevenu, cotisationSubsidiaireMaladie, protectionAssimileSalarie, protectionTNS, scenarioEURL_IR, evaluerEURL_IS, evaluerSASU_IS, evaluerSASU_IR, optimiserSASU_IS, optimiserSASU_IR, optimiserEURL_IS, comparer, evaluerCombo, optimiserCombo }
+})()
+</script>
+<script>
+(function () {
+  'use strict'
+  const M = window.Moteur
+  const P = M.PARAMS_2026
+  const $ = (id) => document.getElementById(id)
+  const NF = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 0 })
+  const eur = (x) => NF.format(Math.round(x)) + ' €'
+  const signe = (x) => (x > 0.5 ? '+' : x < -0.5 ? '−' : '') + NF.format(Math.abs(Math.round(x))) + ' €'
+  const kEur = (x) => NF.format(Math.round(x / 1000)) + ' k€'
+  const moins = (x) => (Math.round(x) === 0 ? '0 €' : '−' + eur(x))
+  const COUL = { "EURL à l'IS": '--s1', "SASU à l'IS": '--s2', "EI / EURL à l'IR": '--s3', "SASU à l'IR": '--s4' }
+  const coul = (n) => `var(${COUL[n]})`
+  const SVGNS = 'http://www.w3.org/2000/svg'
+  function el(tag, attrs, parent) {
+    const e = document.createElementNS(SVGNS, tag)
+    for (const k in attrs) e.setAttribute(k, attrs[k])
+    if (parent) parent.appendChild(e)
+    return e
+  }
+  function txt(parent, x, y, s, attrs = {}) {
+    const t = el('text', Object.assign({ x, y }, attrs), parent)
+    t.textContent = s
+    return t
+  }
+  function h(tag, props = {}, ...kids) {
+    const e = document.createElement(tag)
+    for (const k in props) {
+      if (k === 'class') e.className = props[k]
+      else if (k === 'style') e.setAttribute('style', props[k])
+      else e[k] = props[k]
+    }
+    for (const c of kids) e.append(c)
+    return e
+  }
+  function niceTicks(min, max, n = 6) {
+    const span = max - min || 1
+    const pas0 = span / n
+    const mag = Math.pow(10, Math.floor(Math.log10(pas0)))
+    const pas = [1, 2, 2.5, 5, 10].map((m) => m * mag).find((p) => span / p <= n) || 10 * mag
+    const t = []
+    for (let v = Math.ceil(min / pas) * pas; v <= max + 1e-9; v += pas) t.push(v)
+    return { t, lo: Math.min(min, t[0]), hi: Math.max(max, t[t.length - 1]) }
+  }
+
+  // ---------------------------------------------------------------- saisie
+  function lire() {
+    const B = Math.max(5000, Number($('benefice').value) || 0)
+    const couple = $('foyerCouple').checked
+    const foyer = {
+      couple,
+      enfants: Math.max(0, Math.round(Number($('enfants').value) || 0)),
+      autresRevenusImposables: Math.max(0, Number($('autres').value) || 0),
+      conjointActif: couple && $('conjointActif').checked,
+    }
+    const opts = {
+      salaireMin: Number($('plancher').value) || 0,
+      inclureSASU_IR: $('sasuIR').checked,
+      capitalEtCCA: Math.max(0, Number($('capital').value) || 0),
+      cotisationsDividendesPersonnelles: $('prudent').checked,
+      tauxATMP: Math.max(0, Number($('atmp').value) || 0) / 100,
+      prevoyanceCadre: $('prevoyance').checked,
+      artisan: $('artisan').checked,
+    }
+    return { B, foyer, opts }
+  }
+
+  // ---------------------------------------------------------------- rendu principal
+  let dernier = null
+  function calculer() {
+    const { B, foyer, opts } = lire()
+    const res = M.comparer(B, foyer, P, opts)
+    const tri = [...res].sort((a, b) => b.revenuDisponible - a.revenuDisponible)
+    dernier = { B, foyer, opts, res, tri }
+    rendreVerdict(B, tri)
+    rendreDetail(res, tri[0])
+    rendreProtection(res)
+    rendreDosage(B, foyer, opts, res)
+    planifierBalayage()
+  }
+
+  function rendreVerdict(B, tri) {
+    const g = tri[0]
+    const s = tri[1]
+    const v = $('verdict')
+    v.textContent = ''
+    const art = (n) => (n.startsWith('S') ? 'la ' : "l'")
+    v.append(
+      `Avec ${eur(B)} de bénéfice, ${art(g.structure)}`,
+      h('strong', {}, g.structure),
+      ' vous laisse ',
+      h('span', { class: 'surligne' }, eur(g.revenuDisponible) + ' par an'),
+      `, soit ${eur(g.revenuDisponible - s.revenuDisponible)} de plus que ${art(s.structure)}${s.structure}.`,
+    )
+    const c = $('classement')
+    c.textContent = ''
+    tri.forEach((r, i) => {
+      const p = r.protection
+      const remu = r.structure.startsWith('SASU') ? `Salaire ${eur(r.choix.remuneration)} brut` : r.structure === "EURL à l'IS" ? `Rémunération ${eur(r.choix.remuneration)} (coût)` : 'Tout le bénéfice'
+      const div = r.structure === "SASU à l'IR" ? `quote-part ${eur(r.choix.quotePart)}` : r.dividendesBruts > 0 ? `dividendes ${eur(r.dividendesBruts)}` : 'pas de dividendes'
+      const carte = h(
+        'div',
+        { class: 'struct' + (i === 0 ? ' gagnant' : '') },
+        h('div', { class: 'tete' }, h('span', { class: 'pastille', style: `background:${coul(r.structure)}` }), r.structure, h('span', { class: 'rang' }, i === 0 ? '1er' : `${i + 1}e`)),
+        h('div', { class: 'montant' }, eur(r.revenuDisponible)),
+        h('div', { class: 'ecart' }, i === 0 ? 'Revenu disponible par an' : `${signe(r.revenuDisponible - tri[0].revenuDisponible)} par rapport au 1er`),
+        h('div', { class: 'repart' }, `${remu}, ${div}`),
+        h(
+          'div',
+          { class: 'puces' },
+          h('span', { class: 'puce ' + (p.trimestres >= 4 ? 'ok' : 'ko') }, `${p.trimestres} trimestre${p.trimestres > 1 ? 's' : ''}`),
+          h('span', { class: 'puce ' + (p.ijJour > 0 ? 'ok' : 'ko') }, p.ijJour > 0 ? `IJ ${NF.format(p.ijJour)} €/j` : "pas d'IJ"),
+          h('span', { class: 'puce' }, `retraite ≈ ${kEur(p.pensionCarriereComplete)}/an*`),
+        ),
+      )
+      c.append(carte)
+    })
+  }
+
+  function rendreDetail(res, best) {
+    const t = $('tableDetail')
+    t.textContent = ''
+    const thead = h('thead')
+    const trh = h('tr', {}, h('th', {}, ''))
+    for (const r of res) trh.append(h('th', {}, h('span', { class: 'pastille', style: `background:${coul(r.structure)}` }), r.structure))
+    thead.append(trh)
+    t.append(thead)
+    const tb = h('tbody')
+    const lignes = [
+      ['Bénéfice', (r) => eur(r.benefice)],
+      ['Rémunération (brut SASU, coût EURL)', (r) => eur(r.choix.remuneration)],
+      ['Dividendes bruts ou quote-part', (r) => eur(r.dividendesBruts || r.choix.quotePart || 0)],
+      ['Impôt sur les sociétés', (r) => moins(r.is)],
+      ['Cotisations et contributions sociales', (r) => moins(r.cotisations)],
+      ['Prélèvements sociaux 18,6 %', (r) => moins(r.prelevementsSociaux)],
+      ['Impôt sur le revenu (attribuable)', (r) => moins(r.impotRevenu)],
+      ['Taxe PUMa', (r) => moins(r.csm)],
+      ['Revenu disponible', (r) => eur(r.revenuDisponible), 'total'],
+      ['Taux de prélèvement global', (r) => (100 * (1 - r.revenuDisponible / r.benefice)).toFixed(1).replace('.', ',') + ' %', 'sous'],
+      ['Imposition des dividendes', (r) => r.modeDividendes, 'sous'],
+      ['Tranche marginale d\'IR', (r) => Math.round(100 * r.detailIR.tmi) + ' %', 'sous'],
+    ]
+    for (const [lab, f, cls] of lignes) {
+      const tr = h('tr', { class: cls || '' }, h('td', {}, lab))
+      for (const r of res) tr.append(h('td', { class: cls === 'total' && r === best ? 'best' : '' }, f(r)))
+      tb.append(tr)
+    }
+    t.append(tb)
+  }
+
+  function rendreProtection(res) {
+    const t = $('tableProtection')
+    t.textContent = ''
+    const thead = h('thead')
+    const trh = h('tr', {}, h('th', {}, ''))
+    for (const r of res) trh.append(h('th', {}, h('span', { class: 'pastille', style: `background:${coul(r.structure)}` }), r.structure))
+    thead.append(trh)
+    t.append(thead)
+    const tb = h('tbody')
+    const L = [
+      ['Régime', (p) => p.regime],
+      ['Trimestres de retraite validés', (p) => `${p.trimestres} / 4`],
+      ['Revenu retenu pour la retraite de base', (p) => eur(p.revenuRetraiteBase)],
+      ['Points de retraite complémentaire / an', (p) => (p.pointsComplementaire ? NF.format(p.pointsComplementaire) + ' (' + p.caisseComplementaire + ')' : '0')],
+      ['Pension « carrière complète »*', (p) => eur(p.pensionCarriereComplete) + '/an'],
+      ['Indemnités journalières maladie', (p) => (p.ijJour > 0 ? p.ijJour.toFixed(2).replace('.', ',') + ' €/jour' : 'aucune')],
+      ['Pension d\'invalidité totale', (p) => (p.invaliditeTotaleAn > 0 ? eur(p.invaliditeTotaleAn) + '/an' : 'aucune')],
+      ['Capital décès (régime obligatoire)', (p) => (p.capitalDeces > 0 ? eur(p.capitalDeces) : 'aucun') + (p.prevoyanceCadre ? ' + prévoyance cadre' : '')],
+    ]
+    for (const [lab, f] of L) {
+      const tr = h('tr', {}, h('td', {}, lab))
+      for (const r of res) tr.append(h('td', {}, f(r.protection)))
+      tb.append(tr)
+    }
+    t.append(tb)
+  }
+
+  // ---------------------------------------------------------------- graphiques
+  function graphiqueLignes(conteneur, cfg) {
+    // cfg : { xs, series: [{nom, valeurs, couleur}], xLabel, yFmt, xFmt, marqueurX, titreBulle(i), lignesBulle(i), points: [{x,y,label,couleur}] }
+    conteneur.textContent = ''
+    const W = Math.max(320, conteneur.clientWidth || 700)
+    const H = Math.round(Math.min(420, Math.max(260, W * 0.5)))
+    const m = { l: 64, r: 16, t: 14, b: 44 }
+    const all = cfg.series.flatMap((s) => s.valeurs).filter((v) => Number.isFinite(v))
+    let yMin = Math.min(0, ...all)
+    let yMax = Math.max(0, ...all)
+    if (cfg.yZeroBas) yMin = Math.min(...all)
+    const pad = (yMax - yMin) * 0.06 || 1000
+    const ty = niceTicks(yMin - pad, yMax + pad, 6)
+    const x0 = cfg.xs[0]
+    const x1 = cfg.xs[cfg.xs.length - 1]
+    const X = (v) => m.l + ((v - x0) / (x1 - x0)) * (W - m.l - m.r)
+    const Y = (v) => m.t + ((ty.hi - v) / (ty.hi - ty.lo)) * (H - m.t - m.b)
+    const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', tabindex: '0', 'aria-label': cfg.aria }, conteneur)
+    for (const v of ty.t) {
+      el('line', { x1: m.l, x2: W - m.r, y1: Y(v), y2: Y(v), stroke: v === 0 && !cfg.yZeroBas ? 'var(--axis)' : 'var(--line)', 'stroke-width': 1 }, svg)
+      txt(svg, m.l - 8, Y(v) + 4, cfg.yFmt(v), { 'text-anchor': 'end', 'font-size': 11, fill: 'var(--muted)', style: 'font-variant-numeric:tabular-nums' })
+    }
+    const tx = niceTicks(x0, x1, Math.max(3, Math.floor(W / 110)))
+    for (const v of tx.t) {
+      if (v < x0 || v > x1) continue
+      txt(svg, X(v), H - m.b + 18, cfg.xFmt(v), { 'text-anchor': 'middle', 'font-size': 11, fill: 'var(--muted)', style: 'font-variant-numeric:tabular-nums' })
+    }
+    txt(svg, (m.l + W - m.r) / 2, H - 8, cfg.xLabel, { 'text-anchor': 'middle', 'font-size': 11, fill: 'var(--muted)' })
+    if (cfg.marqueurX != null && cfg.marqueurX >= x0 && cfg.marqueurX <= x1) {
+      el('line', { x1: X(cfg.marqueurX), x2: X(cfg.marqueurX), y1: m.t, y2: H - m.b, stroke: 'var(--axis)', 'stroke-width': 1 }, svg)
+      txt(svg, X(cfg.marqueurX) + 5, m.t + 11, cfg.marqueurLabel || '', { 'font-size': 11, fill: 'var(--ink-2)' })
+    }
+    for (const s of cfg.series) {
+      let d = ''
+      let on = false
+      s.valeurs.forEach((v, i) => {
+        if (!Number.isFinite(v)) {
+          on = false
+          return
+        }
+        d += (on ? 'L' : 'M') + X(cfg.xs[i]).toFixed(1) + ',' + Y(v).toFixed(1)
+        on = true
+      })
+      el('path', { d, fill: 'none', stroke: s.couleur, 'stroke-width': 2, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' }, svg)
+    }
+    for (const pt of cfg.points || []) {
+      el('circle', { cx: X(pt.x), cy: Y(pt.y), r: 5, fill: pt.couleur, stroke: 'var(--card)', 'stroke-width': 2 }, svg)
+      if (pt.label) txt(svg, Math.min(X(pt.x) + 8, W - m.r - 4), Y(pt.y) - 9, pt.label, { 'font-size': 12, 'font-weight': 600, fill: 'var(--ink)', 'text-anchor': X(pt.x) > W * 0.75 ? 'end' : 'start' })
+    }
+    // couche de survol
+    const curseur = el('line', { y1: m.t, y2: H - m.b, stroke: 'var(--ink-2)', 'stroke-width': 1, visibility: 'hidden' }, svg)
+    const points = cfg.series.map((s) => el('circle', { r: 4, fill: s.couleur, stroke: 'var(--card)', 'stroke-width': 2, visibility: 'hidden' }, svg))
+    const zone = el('rect', { x: m.l, y: m.t, width: W - m.l - m.r, height: H - m.t - m.b, fill: 'transparent' }, svg)
+    const bulle = h('div', { class: 'infobulle' })
+    conteneur.append(bulle)
+    let idx = -1
+    function montrer(i) {
+      idx = Math.max(0, Math.min(cfg.xs.length - 1, i))
+      const xp = X(cfg.xs[idx])
+      curseur.setAttribute('x1', xp)
+      curseur.setAttribute('x2', xp)
+      curseur.setAttribute('visibility', 'visible')
+      cfg.series.forEach((s, k) => {
+        const v = s.valeurs[idx]
+        if (Number.isFinite(v)) {
+          points[k].setAttribute('cx', xp)
+          points[k].setAttribute('cy', Y(v))
+          points[k].setAttribute('visibility', 'visible')
+        } else points[k].setAttribute('visibility', 'hidden')
+      })
+      bulle.textContent = ''
+      bulle.append(h('div', { class: 'titre' }, cfg.titreBulle(idx)))
+      for (const l of cfg.lignesBulle(idx)) {
+        bulle.append(h('div', { class: 'ligne' }, h('span', { class: 'cle', style: `background:${l.couleur}` }), h('b', {}, l.valeur), h('span', {}, l.nom)))
+      }
+      bulle.style.display = 'block'
+      const rect = svg.getBoundingClientRect()
+      const scale = rect.width / W
+      const left = xp * scale
+      const bw = bulle.offsetWidth
+      bulle.style.left = (left + 14 + bw > rect.width ? left - bw - 14 : left + 14) + 'px'
+      bulle.style.top = m.t * scale + 'px'
+    }
+    function cacher() {
+      curseur.setAttribute('visibility', 'hidden')
+      points.forEach((p) => p.setAttribute('visibility', 'hidden'))
+      bulle.style.display = 'none'
+    }
+    zone.addEventListener('pointermove', (e) => {
+      const rect = svg.getBoundingClientRect()
+      const xv = x0 + ((e.clientX - rect.left) / rect.width * W - m.l) / (W - m.l - m.r) * (x1 - x0)
+      let best = 0
+      cfg.xs.forEach((x, i) => {
+        if (Math.abs(x - xv) < Math.abs(cfg.xs[best] - xv)) best = i
+      })
+      montrer(best)
+    })
+    zone.addEventListener('pointerleave', cacher)
+    svg.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        e.preventDefault()
+        montrer((idx < 0 ? 0 : idx) + (e.key === 'ArrowRight' ? 1 : -1))
+      } else if (e.key === 'Escape') cacher()
+    })
+    svg.addEventListener('blur', cacher)
+    svg.addEventListener('focus', () => montrer(idx < 0 ? 0 : idx))
+  }
+
+  function legende(id, items) {
+    const l = $(id)
+    l.textContent = ''
+    for (const it of items) l.append(h('span', {}, h('span', { class: 'cle', style: `background:${it.couleur}` }), it.nom))
+  }
+
+  function tableau(id, entetes, lignes) {
+    const t = $(id)
+    t.textContent = ''
+    const thead = h('thead')
+    const tr = h('tr')
+    entetes.forEach((e) => tr.append(h('th', {}, e)))
+    thead.append(tr)
+    const tb = h('tbody')
+    lignes.forEach((l) => {
+      const r = h('tr')
+      l.forEach((c) => r.append(h('td', {}, c)))
+      tb.append(r)
+    })
+    t.append(thead, tb)
+  }
+
+  // ---------------------------------------------------------------- balayage et bascules
+  let minuterie = null
+  function planifierBalayage() {
+    clearTimeout(minuterie)
+    minuterie = setTimeout(balayage, 120)
+  }
+  let dernierBalayage = null
+  function balayage() {
+    const { B, foyer, opts } = dernier
+    const xmax = Math.max(400000, Math.ceil((B * 1.3) / 50000) * 50000)
+    const pas = xmax > 400000 ? 10000 : 5000
+    const xs = []
+    for (let x = 20000; x <= xmax; x += pas) xs.push(x)
+    const noms = ["EI / EURL à l'IR", "EURL à l'IS", "SASU à l'IS"].concat(opts.inclureSASU_IR ? ["SASU à l'IR"] : [])
+    const val = {}
+    noms.forEach((n) => (val[n] = []))
+    for (const x of xs) {
+      const res = M.comparer(x, foyer, P, opts)
+      for (const n of noms) {
+        const r = res.find((q) => q.structure === n)
+        val[n].push(r ? r.revenuDisponible : NaN)
+      }
+    }
+    dernierBalayage = { xs, val, noms, B }
+    rendreBalayage()
+  }
+
+  function rendreBalayage() {
+    if (!dernierBalayage) return
+    const { xs, val, noms, B } = dernierBalayage
+    const ref = val["EI / EURL à l'IR"]
+    const series = noms
+      .filter((n) => n !== "EI / EURL à l'IR")
+      .map((n) => ({ nom: n, couleur: coul(n), valeurs: val[n].map((v, i) => v - ref[i]) }))
+    legende('legende1', series.map((s) => ({ nom: s.nom, couleur: s.couleur })).concat([{ nom: "ligne 0 = EI / EURL à l'IR", couleur: 'var(--axis)' }]))
+    graphiqueLignes($('graph1'), {
+      xs,
+      series,
+      aria: "Gain de revenu disponible par rapport à l'EI selon le bénéfice",
+      xLabel: 'Bénéfice annuel avant rémunération du dirigeant',
+      yFmt: (v) => (v > 0 ? '+' : v < 0 ? '−' : '') + NF.format(Math.abs(v / 1000)) + ' k€',
+      xFmt: kEur,
+      marqueurX: B,
+      marqueurLabel: 'votre bénéfice',
+      titreBulle: (i) => `Bénéfice ${eur(xs[i])}`,
+      lignesBulle: (i) =>
+        noms
+          .map((n) => ({ nom: n, couleur: coul(n), v: val[n][i], valeur: eur(val[n][i]) }))
+          .sort((a, b) => b.v - a.v),
+    })
+    // zones et bascules
+    const zones = []
+    xs.forEach((x, i) => {
+      const best = noms.reduce((a, b) => (val[a][i] >= val[b][i] ? a : b))
+      if (!zones.length || zones[zones.length - 1].best !== best) zones.push({ best, de: x, a: x })
+      else zones[zones.length - 1].a = x
+    })
+    const z = $('zones')
+    z.textContent = ''
+    const span = xs[xs.length - 1] - xs[0]
+    zones.forEach((zo) => {
+      const largeur = ((zo.a - zo.de + (xs[1] - xs[0])) / (span + (xs[1] - xs[0]))) * 100
+      z.append(h('div', { style: `flex:${largeur} 1 0;background:${coul(zo.best)};color:${zo.best === "SASU à l'IR" ? '#0b0b0b' : '#fff'}`, title: zo.best }, largeur > 12 ? zo.best : ''))
+    })
+    const ul = $('bascules')
+    ul.textContent = ''
+    zones.forEach((zo) => ul.append(h('li', {}, `de ${kEur(zo.de)} à ${zo.a >= xs[xs.length - 1] ? kEur(zo.a) + ' et au-delà' : kEur(zo.a)} : `, h('strong', {}, zo.best))))
+    // duel EURL IS / SASU IS
+    const a = val["EURL à l'IS"]
+    const b = val["SASU à l'IS"]
+    const duel = []
+    let prec = null
+    xs.forEach((x, i) => {
+      const d = a[i] - b[i]
+      if (Math.abs(d) < 5 || !Number.isFinite(d)) return
+      if (prec && Math.sign(prec.d) !== Math.sign(d)) duel.push(prec.x + ((x - prec.x) * prec.d) / (prec.d - d))
+      prec = { x, d }
+    })
+    ul.append(h('li', {}, 'Duel EURL à l\'IS / SASU à l\'IS : ', duel.length ? 'bascule vers ' + duel.map((x) => kEur(x)).join(' puis ') : 'pas de bascule sur la plage étudiée'))
+    tableau(
+      'table1',
+      ['Bénéfice', ...noms],
+      xs.map((x, i) => [eur(x), ...noms.map((n) => eur(val[n][i]))]),
+    )
+  }
+
+  // ---------------------------------------------------------------- dosage salaire / dividendes
+  function rendreDosage(B, foyer, opts, res) {
+    const N = 80
+    const xs = []
+    for (let i = 0; i <= N; i++) xs.push(i / N)
+    const sasu = []
+    const eurl = []
+    const sMax = M.brutDepuisCout(B, P, opts)
+    const optsLibres = Object.assign({}, opts, { salaireMin: 0 })
+    const sasuS = []
+    for (const f of xs) {
+      const S = M.brutDepuisCout(f * B, P, optsLibres)
+      const r = M.evaluerSASU_IS(B, Math.min(S, sMax), foyer, P, optsLibres)
+      sasu.push(r ? r.revenuDisponible : NaN)
+      sasuS.push(S)
+      const e = M.evaluerEURL_IS(B, f * B, foyer, P, opts)
+      eurl.push(e ? e.revenuDisponible : NaN)
+    }
+    const rS = res.find((r) => r.structure === "SASU à l'IS")
+    const rE = res.find((r) => r.structure === "EURL à l'IS")
+    const fS = rS.detailCotisations.coutTotal / B
+    const fE = rE.choix.remuneration / B
+    $('noteDosage').textContent = `Revenu disponible selon la part du bénéfice versée en rémunération (coût pour la société), le reste étant distribué en dividendes après IS. Optimum SASU à l'IS : salaire brut de ${eur(rS.choix.remuneration)}. Optimum EURL à l'IS : rémunération de ${eur(rE.choix.remuneration)}.` + (opts.salaireMin ? ' Le plancher de salaire choisi est appliqué au point affiché pour la SASU.' : '')
+    const series = [
+      { nom: "EURL à l'IS", couleur: coul("EURL à l'IS"), valeurs: eurl },
+      { nom: "SASU à l'IS", couleur: coul("SASU à l'IS"), valeurs: sasu },
+    ]
+    legende('legende2', series.map((s) => ({ nom: s.nom, couleur: s.couleur })))
+    const pct = (f) => NF.format(Math.round(f * 100)) + ' %'
+    graphiqueLignes($('graph2'), {
+      xs,
+      series,
+      yZeroBas: true,
+      aria: 'Revenu disponible selon la part du bénéfice versée en rémunération',
+      xLabel: 'Part du bénéfice versée en rémunération (coût pour la société)',
+      yFmt: (v) => NF.format(v / 1000) + ' k€',
+      xFmt: pct,
+      points: [
+        { x: fE, y: rE.revenuDisponible, couleur: coul("EURL à l'IS"), label: 'optimum ' + eur(rE.revenuDisponible) },
+        { x: fS, y: rS.revenuDisponible, couleur: coul("SASU à l'IS"), label: 'optimum ' + eur(rS.revenuDisponible) },
+      ],
+      titreBulle: (i) => `${pct(xs[i])} du bénéfice en rémunération`,
+      lignesBulle: (i) => [
+        { nom: `EURL, rémunération ${eur(xs[i] * B)}`, couleur: coul("EURL à l'IS"), valeur: Number.isFinite(eurl[i]) ? eur(eurl[i]) : 'n/a' },
+        { nom: `SASU, salaire brut ${eur(sasuS[i])}`, couleur: coul("SASU à l'IS"), valeur: Number.isFinite(sasu[i]) ? eur(sasu[i]) : 'n/a' },
+      ],
+    })
+    tableau(
+      'table2',
+      ['Part en rémunération', 'EURL : rémunération (coût)', 'EURL : disponible', 'SASU : salaire brut', 'SASU : disponible'],
+      xs.filter((_, i) => i % 4 === 0).map((f) => {
+        const i = xs.indexOf(f)
+        return [pct(f), eur(f * B), Number.isFinite(eurl[i]) ? eur(eurl[i]) : 'n/a', eur(sasuS[i]), Number.isFinite(sasu[i]) ? eur(sasu[i]) : 'n/a']
+      }),
+    )
+  }
+
+  // ---------------------------------------------------------------- événements
+  const form = $('form')
+  form.addEventListener('submit', (e) => e.preventDefault())
+  $('beneficeRange').addEventListener('input', () => {
+    $('benefice').value = $('beneficeRange').value
+    calculer()
+  })
+  $('benefice').addEventListener('input', () => {
+    $('beneficeRange').value = $('benefice').value
+    calculer()
+  })
+  form.addEventListener('change', calculer)
+  for (const id of ['enfants', 'autres', 'capital', 'atmp']) $(id).addEventListener('input', calculer)
+  let rz = null
+  window.addEventListener('resize', () => {
+    clearTimeout(rz)
+    rz = setTimeout(() => {
+      if (dernier) rendreDosage(dernier.B, dernier.foyer, dernier.opts, dernier.res)
+      rendreBalayage()
+    }, 150)
+  })
+  calculer()
+})()
+</script>
+</body>
+</html>
