@@ -508,6 +508,7 @@ export function evaluerEURL_IS(benefice, R, foyer, P = PARAMS_2026, opts = {}) {
   const capitalEtCCA = opts.capitalEtCCA ?? 1000
   const reserve = opts.reserve || 0 // bénéfice net laissé en réserve
   const is = impotSocietes(benefice - R, P)
+  if (benefice - R - is < reserve - 1e-6) return null // réserve impossible à constituer
   const D = pos(benefice - R - is - reserve)
   const Dlibre = Math.min(D, 0.1 * capitalEtCCA)
   const Dsoumis = D - Dlibre
@@ -559,6 +560,7 @@ export function evaluerSASU_IS(benefice, S, foyer, P = PARAMS_2026, opts = {}) {
   if (c.coutTotal > benefice + 1e-6) return null
   const reserve = opts.reserve || 0
   const is = impotSocietes(benefice - c.coutTotal, P)
+  if (benefice - c.coutTotal - is < reserve - 1e-6) return null
   const D = pos(benefice - c.coutTotal - is - reserve)
   const f = fiscalitePersonnelle(
     {
