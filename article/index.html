@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EI, EURL ou SASU à 180 000 €</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* Article long format : une colonne de lecture, tableaux et graphiques plus larges que le texte. */
+:root { color-scheme: light; --paper:#f2f2ee; --card:#fcfcfb; --ink:#0b0b0b; --ink-2:#52514e; --line:#e1e0d9; --accent:#4436c8; --mark:#ffe066;
+  --display:"Bricolage Grotesque","IBM Plex Sans",system-ui,sans-serif; --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { color-scheme: dark; --paper:#0d0d0d; --card:#1a1a19; --ink:#f0efec; --ink-2:#c3c2b7; --line:#2c2c2a; --accent:#a69cf5; --mark:#5c4b00; } }
+:root[data-theme="dark"] { color-scheme: dark; --paper:#0d0d0d; --card:#1a1a19; --ink:#f0efec; --ink-2:#c3c2b7; --line:#2c2c2a; --accent:#a69cf5; --mark:#5c4b00; }
+* { box-sizing: border-box; }
+body { margin:0; background:var(--paper); color:var(--ink); font:17px/1.65 var(--body); }
+main { max-width: 860px; margin: 0 auto; padding: 40px 20px 80px; }
+main > p, main > ul, main > ol, main > h2, main > h3, main > blockquote { max-width: 68ch; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; line-height: 1.15; }
+h1 { font-size: clamp(32px, 5vw, 50px); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 18px; }
+h2 { font-size: 28px; margin: 48px 0 12px; letter-spacing: -0.01em; }
+h3 { font-size: 20px; margin: 30px 0 8px; }
+a { color: var(--accent); }
+strong { background: linear-gradient(transparent 62%, var(--mark) 62%); }
+hr { border: 0; border-top: 1px solid var(--line); margin: 36px 0; }
+li { margin: 4px 0; }
+.tw { overflow-x: auto; margin: 18px 0; background: var(--card); border: 1px solid var(--line); border-radius: 10px; }
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; font-variant-numeric: tabular-nums; }
+th, td { padding: 8px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+th { font-size: 13px; color: var(--ink-2); font-weight: 600; }
+tr:last-child td { border-bottom: 0; }
+td strong, th strong { background: none; }
+figure { margin: 22px 0; }
+figure svg { width: 100%; height: auto; display: block; border-radius: 10px; }
+em { color: var(--ink-2); }
+code { font-size: .9em; }
+</style>
+</head>
+<body>
+<main>
+<h1>180 000 € de bénéfice : EI, EURL ou SASU ? J'ai refait tous les calculs avec les règles 2026</h1>
+<p><em>Temps de lecture : 15 minutes. Simulateur en fin d&#39;article pour tester votre propre situation.</em></p>
+<p>« Passe en SASU, tu te verseras des dividendes, c&#39;est beaucoup moins chargé. »</p>
+<p>Si vous êtes indépendant et que vos affaires marchent, quelqu&#39;un vous a forcément sorti cette phrase. Un ami, un forum, parfois même un expert-comptable pressé. Elle avait un fond de vérité il y a quelques années. En 2026, pour un bénéfice de 180 000 €, elle est fausse. Et pas de quelques euros.</p>
+<p>J&#39;ai pris un cas simple, je l&#39;ai passé dans un moteur de calcul calibré au centime près sur ceux de l&#39;Urssaf, et j&#39;ai comparé les quatre options sérieuses. Résultat : à 180 000 € de bénéfice, l&#39;<strong>EURL à l&#39;impôt sur les sociétés</strong> laisse <strong>102 142 € par an</strong> dans la poche d&#39;un célibataire, soit <strong>4 903 € de plus que la SASU</strong> et <strong>11 053 € de plus que l&#39;entreprise individuelle</strong>. Et cerise sur le gâteau, elle lui ouvre environ trois fois plus de droits à la retraite que la SASU optimisée.</p>
+<p>Je vous montre tout : le cas, les chiffres, les raisons, les points de bascule selon votre bénéfice, ce que vos cotisations vous achètent réellement, et les limites de l&#39;exercice. Parce qu&#39;un chiffre sans ses hypothèses, c&#39;est du marketing.</p>
+<hr>
+<h2>Le cas étudié</h2>
+<ul>
+<li>Un consultant indépendant (disons du conseil en immobilier) qui dégage <strong>180 000 € de bénéfice par an</strong>, avant sa propre rémunération. Pas de charges : chiffre d&#39;affaires = bénéfice.</li>
+<li>Il veut <strong>maximiser son revenu disponible</strong> : ce qui lui reste après cotisations sociales, impôt sur les sociétés, prélèvements sociaux et impôt sur le revenu. Tout le bénéfice est versé dans l&#39;année, rien n&#39;est laissé en réserve.</li>
+<li>Cas de base : <strong>célibataire, sans enfant, sans autre revenu</strong>. J&#39;ai aussi testé un couple avec deux enfants et un couple dont le conjoint est salarié.</li>
+<li>Règles <strong>2026</strong> : plafond de la Sécurité sociale (PASS) à 48 060 €, barème de l&#39;impôt sur le revenu de la loi de finances pour 2026, prélèvement forfaitaire unique (PFU) à 31,4 %, réforme de l&#39;assiette des cotisations des indépendants.</li>
+</ul>
+<p>Quatre structures en lice, chacune <strong>optimisée</strong> : pour chacune, j&#39;ai testé toutes les répartitions possibles entre rémunération et dividendes et retenu la meilleure.</p>
+<ol>
+<li><strong>EI ou EURL à l&#39;IR</strong> : tout le bénéfice est votre revenu, soumis aux cotisations des travailleurs non salariés (TNS) puis à l&#39;impôt sur le revenu.</li>
+<li><strong>EURL à l&#39;IS</strong> : vous êtes gérant majoritaire (TNS), la société paie l&#39;IS, vous vous versez une rémunération et éventuellement des dividendes.</li>
+<li><strong>SASU à l&#39;IS</strong> : vous êtes président « assimilé salarié », la société vous verse un salaire et des dividendes.</li>
+<li><strong>SASU à l&#39;IR</strong> : l&#39;option temporaire (5 exercices maximum, société de moins de 5 ans) où le bénéfice est imposé directement à votre nom.</li>
+</ol>
+<h2>Le verdict en un tableau</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Structure (optimisée)</th>
+<th>Ce que vous vous versez</th>
+<th>Revenu disponible</th>
+<th>Écart avec la meilleure</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>EURL à l&#39;IS</strong></td>
+<td>137 500 € de rémunération (coût société) + 36 125 € de dividendes</td>
+<td><strong>102 142 €</strong></td>
+<td>référence</td>
+</tr>
+<tr>
+<td>SASU à l&#39;IS</td>
+<td>23 352 € de salaire brut + 114 850 € de dividendes</td>
+<td>97 239 €</td>
+<td>−4 903 €</td>
+</tr>
+<tr>
+<td>SASU à l&#39;IR</td>
+<td>11 735 € de salaire brut + 163 651 € de bénéfice imposé à votre nom</td>
+<td>92 603 €</td>
+<td>−9 539 €</td>
+</tr>
+<tr>
+<td>EI / EURL à l&#39;IR</td>
+<td>les 180 000 €</td>
+<td>91 089 €</td>
+<td>−11 053 €</td>
+</tr>
+</tbody></table></div>
+<p><em>Célibataire sans enfant, règles 2026, chaque structure optimisée.</em></p>
+<p>Et voici où partent les 180 000 € dans chaque cas :</p>
+<p><figure><svg aria-label="Répartition du bénéfice de 180 000 € entre revenu disponible, impôts et cotisations" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 344" width="760" height="344" role="img" aria-labelledby="t d"><title id="t">Où partent les 180 000 € de bénéfice ?</title><desc id="d">Répartition du bénéfice entre revenu disponible, impôts et cotisations, par structure optimisée (célibataire)</desc><style>
+  .bg{fill:#fcfcfb} .t1{fill:#0b0b0b} .t2{fill:#52514e} .t3{fill:#898781}
+  .grid{stroke:#e1e0d9;stroke-width:1} .axis{stroke:#c3c2b7;stroke-width:1}
+  .ring{stroke:#fcfcfb} .ln{fill:none;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+  text{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+  .tab{font-variant-numeric:tabular-nums}
+  .s1{stroke:#2a78d6;fill:#2a78d6}.s2{stroke:#eb6834;fill:#eb6834}.s3{stroke:#1baf7a;fill:#1baf7a}.s4{stroke:#eda100;fill:#eda100}.g0{fill:#2a78d6}.g1{fill:#eb6834}.g2{fill:#1baf7a}.g3{fill:#eda100}.g4{fill:#e87ba4}.g5{fill:#008300}
+  @media (prefers-color-scheme: dark){
+    .bg{fill:#1a1a19} .t1{fill:#f0efec} .t2{fill:#c3c2b7}
+    .grid{stroke:#2c2c2a} .axis{stroke:#383835} .ring{stroke:#1a1a19}
+    .s1{stroke:#3987e5;fill:#3987e5}.s2{stroke:#d95926;fill:#d95926}.s3{stroke:#199e70;fill:#199e70}.s4{stroke:#c98500;fill:#c98500}.g0{fill:#3987e5}.g1{fill:#d95926}.g2{fill:#199e70}.g3{fill:#c98500}.g4{fill:#d55181}.g5{fill:#008300}
+  }
+  path.ln,line.ln{fill:none}
+  
+</style><rect class="bg" width="760" height="344" rx="8"/><text class="t1" x="20" y="30" font-size="17" font-weight="600">Où partent les 180 000 € de bénéfice ?</text><text class="t2" x="20" y="52" font-size="13">Célibataire, solutions optimisées, règles 2026. Tout le disponible est versé dans l'année.</text><rect class="g0" x="20" y="71" width="12" height="12" rx="3"/><text class="t2" x="38" y="81" font-size="12">Revenu disponible</text><rect class="g1" x="168.8" y="71" width="12" height="12" rx="3"/><text class="t2" x="186.8" y="81" font-size="12">Impôt sur le revenu</text><rect class="g2" x="330.40000000000003" y="71" width="12" height="12" rx="3"/><text class="t2" x="348.40000000000003" y="81" font-size="12">Prélèvements sociaux 18,6 %</text><rect class="g3" x="543.2" y="71" width="12" height="12" rx="3"/><text class="t2" x="561.2" y="81" font-size="12">Impôt sur les sociétés</text><rect class="g4" x="20" y="91" width="12" height="12" rx="3"/><text class="t2" x="38" y="101" font-size="12">Cotisations créant des droits retraite</text><rect class="g5" x="303.20000000000005" y="91" width="12" height="12" rx="3"/><text class="t2" x="321.20000000000005" y="101" font-size="12">Autres cotisations et CSG</text><text class="t1" x="140" y="146" font-size="13" text-anchor="end">EI / EURL à l'IR</text><rect class="g0" x="150.0" y="130" width="291.5" height="24" rx="4"/><text x="156.0" y="146" font-size="11" fill="#ffffff" class="tab">91 k€</text><rect class="g1" x="443.5" y="130" width="122.1" height="24" rx="0"/><text x="449.5" y="146" font-size="11" fill="#ffffff" class="tab">39 k€</text><rect class="g4" x="567.6" y="130" width="63.2" height="24" rx="0"/><text x="573.6" y="146" font-size="11" fill="#ffffff" class="tab">20 k€</text><rect class="g5" x="632.8" y="130" width="95.2" height="24" rx="4"/><text x="638.8" y="146" font-size="11" fill="#ffffff" class="tab">30 k€</text><text class="t1" x="140" y="192" font-size="13" text-anchor="end">EURL à l'IS</text><rect class="g0" x="150.0" y="176" width="327.1" height="24" rx="4"/><text x="156.0" y="192" font-size="11" fill="#ffffff" class="tab">102 k€</text><rect class="g1" x="479.1" y="176" width="71.1" height="24" rx="0"/><text x="485.1" y="192" font-size="11" fill="#ffffff" class="tab">23 k€</text><rect class="g2" x="552.2" y="176" width="0.0" height="24" rx="0"/><rect class="g3" x="552.3" y="176" width="18.5" height="24" rx="0"/><rect class="g4" x="572.8" y="176" width="61.8" height="24" rx="0"/><text x="578.8" y="192" font-size="11" fill="#ffffff" class="tab">20 k€</text><rect class="g5" x="636.6" y="176" width="91.4" height="24" rx="4"/><text x="642.6" y="192" font-size="11" fill="#ffffff" class="tab">29 k€</text><text class="t1" x="140" y="238" font-size="13" text-anchor="end">SASU à l'IS</text><rect class="g0" x="150.0" y="222" width="311.3" height="24" rx="4"/><text x="156.0" y="238" font-size="11" fill="#ffffff" class="tab">97 k€</text><rect class="g1" x="463.3" y="222" width="45.4" height="24" rx="0"/><text x="469.3" y="238" font-size="11" fill="#ffffff" class="tab">15 k€</text><rect class="g2" x="510.7" y="222" width="66.8" height="24" rx="0"/><text x="516.7" y="238" font-size="11" fill="#ffffff" class="tab">21 k€</text><rect class="g3" x="579.5" y="222" width="103.1" height="24" rx="0"/><text x="585.5" y="238" font-size="11" fill="#0b0b0b" class="tab">33 k€</text><rect class="g4" x="684.6" y="222" width="14.3" height="24" rx="0"/><rect class="g5" x="700.9" y="222" width="27.1" height="24" rx="4"/><text class="t1" x="140" y="284" font-size="13" text-anchor="end">SASU à l'IR</text><rect class="g0" x="150.0" y="268" width="296.4" height="24" rx="4"/><text x="156.0" y="284" font-size="11" fill="#ffffff" class="tab">93 k€</text><rect class="g1" x="448.4" y="268" width="158.7" height="24" rx="0"/><text x="454.4" y="284" font-size="11" fill="#ffffff" class="tab">50 k€</text><rect class="g2" x="609.1" y="268" width="96.1" height="24" rx="0"/><text x="615.1" y="284" font-size="11" fill="#ffffff" class="tab">30 k€</text><rect class="g4" x="707.2" y="268" width="6.2" height="24" rx="0"/><rect class="g5" x="715.4" y="268" width="12.6" height="24" rx="4"/></svg></figure></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>EI / EURL IR</th>
+<th>EURL IS</th>
+<th>SASU IS</th>
+<th>SASU IR</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Impôt sur les sociétés</td>
+<td>0 €</td>
+<td>6 375 €</td>
+<td>32 617 €</td>
+<td>0 €</td>
+</tr>
+<tr>
+<td>Cotisations sociales</td>
+<td>50 385 €</td>
+<td>48 776 €</td>
+<td>14 082 €</td>
+<td>7 077 €</td>
+</tr>
+<tr>
+<td><em>dont cotisations qui créent des droits retraite</em></td>
+<td><em>20 229 €</em></td>
+<td><em>19 793 €</em></td>
+<td><em>5 055 €</em></td>
+<td><em>2 540 €</em></td>
+</tr>
+<tr>
+<td>Prélèvements sociaux (18,6 %)</td>
+<td>0 €</td>
+<td>19 €</td>
+<td>21 362 €</td>
+<td>30 439 €</td>
+</tr>
+<tr>
+<td>Impôt sur le revenu</td>
+<td>38 527 €</td>
+<td>22 689 €</td>
+<td>14 701 €</td>
+<td>49 882 €</td>
+</tr>
+<tr>
+<td><strong>Total prélevé</strong></td>
+<td><strong>88 911 € (49,4 %)</strong></td>
+<td><strong>77 858 € (43,3 %)</strong></td>
+<td><strong>82 761 € (46,0 %)</strong></td>
+<td><strong>87 397 € (48,6 %)</strong></td>
+</tr>
+</tbody></table></div>
+<p>Regardez la ligne en italique. Elle est importante, on y revient plus bas.</p>
+<h2>Pourquoi l&#39;EURL à l&#39;IS gagne (alors que tout le monde vous vend la SASU)</h2>
+<h3>1. Les 10 % que l&#39;EI ne vous donnera jamais</h3>
+<p>En EI ou en EURL à l&#39;IR, votre bénéfice est imposé comme un bénéfice (BIC ou BNC) : pas d&#39;abattement. En EURL à l&#39;IS, votre rémunération de gérant majoritaire est imposée selon les règles des traitements et salaires (article 62 du CGI, qui renvoie à l&#39;<a target="_blank" rel="noopener" href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000037985819/">article 83 du CGI</a>), avec l&#39;<strong>abattement forfaitaire de 10 % pour frais professionnels</strong> (plafonné à 14 555 € dans le barème 2026).</p>
+<p>Même bénéfice, mêmes cotisations, mais 14 555 € de revenu imposable en moins. À une tranche marginale de 41 %, ça fait <strong>+5 472 € par an</strong>, juste en changeant d&#39;option fiscale et en vous versant tout en rémunération. Bonus : une EI peut aussi opter pour l&#39;IS depuis 2022, avec le même effet.</p>
+<h3>2. La tranche à 15 % de l&#39;IS</h3>
+<p>L&#39;IS est à <strong>15 % sur les 42 500 premiers euros de bénéfice</strong>, 25 % au-delà (article 219 du CGI, taux et seuil inchangés par la loi de finances pour 2026). Laisser 42 500 € de bénéfice dans l&#39;EURL, payer 6 375 € d&#39;IS et se distribuer le reste en dividendes coûte moins cher que de se verser ces 42 500 € en rémunération quand on est déjà dans la tranche à 41 %.</p>
+<p>Oui, même si ces dividendes supportent les cotisations TNS. En EURL, la part des dividendes qui dépasse 10 % du capital social et des comptes courants est soumise aux cotisations sociales comme une rémunération (<a target="_blank" rel="noopener" href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000048683707">article L131-6 du code de la sécurité sociale</a>). C&#39;est le fameux piège de l&#39;EURL. Sauf qu&#39;en face, la tranche à 41 % pique encore plus. Le calcul tranche : <strong>+5 581 € de plus</strong> par rapport au « tout en rémunération ».</p>
+<h3>3. La SASU paie cher ses deux tuyaux</h3>
+<p>En SASU, vous avez deux façons de sortir l&#39;argent, et aucune n&#39;est bon marché en 2026 :</p>
+<ul>
+<li><strong>Le salaire de président</strong> coûte cher en cotisations : pour 100 € dépensés par la société, environ <strong>57 € nets</strong> arrivent sur votre compte avant impôt (contre 68 à 72 € pour un TNS selon le niveau de revenu). Le président de SASU n&#39;a pas de contrat de travail : pas d&#39;assurance chômage, mais pas non plus de réduction générale de cotisations, et les taux réduits maladie et famille ont disparu au 1er janvier 2026 avec la réforme des allègements généraux.</li>
+<li><strong>Les dividendes</strong> passent d&#39;abord par l&#39;IS, puis par le <strong>PFU, passé de 30 % à 31,4 %</strong> au 1er janvier 2026 : l&#39;article 12 de la LFSS 2026 a relevé la CSG sur les revenus du capital de 9,2 % à 10,6 % (<a target="_blank" rel="noopener" href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000051287395">article L136-8 CSS</a>). Au-delà de 42 500 € de bénéfice, chaque euro distribué en dividende perd <strong>48,55 %</strong> en route (25 % d&#39;IS, puis 31,4 % sur les 75 % restants).</li>
+</ul>
+<p>Résultat, la SASU optimisée verse un petit salaire (23 352 € brut, pour remplir les tranches à 0 % et 11 % de l&#39;IR) et tout le reste en dividendes. C&#39;est efficace fiscalement, mais ça plafonne à 97 239 €.</p>
+<p>Pour visualiser, voici ce qu&#39;il reste de <strong>1 000 € de bénéfice supplémentaire</strong> selon la structure (célibataire) :</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Bénéfice</th>
+<th>30 k€</th>
+<th>60 k€</th>
+<th>100 k€</th>
+<th>180 k€</th>
+<th>300 k€</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>EI / EURL à l&#39;IR</td>
+<td>55 %</td>
+<td>45 %</td>
+<td>53 %</td>
+<td>44 %</td>
+<td>42 %</td>
+</tr>
+<tr>
+<td>EURL à l&#39;IS optimisée</td>
+<td>56 %</td>
+<td>50 %</td>
+<td>58 %</td>
+<td>55 %</td>
+<td>54 %</td>
+</tr>
+<tr>
+<td>SASU à l&#39;IS optimisée</td>
+<td>64 %</td>
+<td>54 %</td>
+<td>49 %</td>
+<td>51 %</td>
+<td>51 %</td>
+</tr>
+<tr>
+<td>SASU à l&#39;IR optimisée</td>
+<td>60 %</td>
+<td>51 %</td>
+<td>43 %</td>
+<td>43 %</td>
+<td>37 %</td>
+</tr>
+</tbody></table></div>
+<p>La SASU est imbattable sur les premiers euros, l&#39;EURL à l&#39;IS reprend la main dès que le bénéfice grimpe.</p>
+<h3>Un mot sur la réforme 2026 des cotisations des indépendants</h3>
+<p>Depuis les revenus 2025 (régularisés en 2026), les cotisations des TNS sont calculées sur une <strong>assiette unique</strong> : le revenu avant cotisations, <strong>abattu de 26 %</strong> (abattement compris entre 1,76 % et 130 % du PASS), avec de nouveaux barèmes maladie et retraite (décret n° 2024-688 du 5 juillet 2024, détails sur la <a target="_blank" rel="noopener" href="https://www.urssaf.fr/accueil/independant/comprendre-payer-cotisations/reforme-cotisations-independants.html">page de l&#39;Urssaf</a>). Fini le calcul circulaire où la CSG portait sur les cotisations elles-mêmes. Mes calculs l&#39;intègrent, et je les ai vérifiés contre le moteur officiel de l&#39;Urssaf qui l&#39;implémente : écart inférieur à 0,05 %.</p>
+<h2>« Oui mais la SASU, c&#39;est mieux protégé ! » Vraiment ?</h2>
+<p>C&#39;est l&#39;autre argument massue. Il est vrai dans un cas précis : quand le président de SASU se verse un <strong>gros salaire</strong>. Ce qui est exactement ce qu&#39;il ne fait pas quand il optimise.</p>
+<p>Voici ce que chaque structure optimisée vous ouvre comme droits à 180 000 € :</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>EI / EURL IR</th>
+<th><strong>EURL IS</strong></th>
+<th>SASU IS</th>
+<th>SASU IR</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Trimestres de retraite</td>
+<td>4 / 4</td>
+<td>4 / 4</td>
+<td>4 / 4</td>
+<td>4 / 4</td>
+</tr>
+<tr>
+<td>Revenu retenu pour la retraite de base</td>
+<td>48 060 € (PASS)</td>
+<td>48 060 € (PASS)</td>
+<td>23 352 €</td>
+<td>11 735 €</td>
+</tr>
+<tr>
+<td>Points de retraite complémentaire par an</td>
+<td>536 (RCI)</td>
+<td>516 (RCI)</td>
+<td>72 (Agirc-Arrco)</td>
+<td>36 (Agirc-Arrco)</td>
+</tr>
+<tr>
+<td>Pension « carrière complète »*</td>
+<td>≈ 55 000 €/an</td>
+<td><strong>≈ 54 000 €/an</strong></td>
+<td>≈ 16 100 €/an</td>
+<td>≈ 8 100 €/an</td>
+</tr>
+<tr>
+<td>Indemnités journalières maladie</td>
+<td>65,84 €/jour</td>
+<td><strong>65,84 €/jour</strong></td>
+<td>aucune</td>
+<td>aucune</td>
+</tr>
+<tr>
+<td>Pension d&#39;invalidité totale</td>
+<td>24 030 €/an</td>
+<td><strong>24 030 €/an</strong></td>
+<td>aucune</td>
+<td>aucune</td>
+</tr>
+<tr>
+<td>Capital décès (régime obligatoire)</td>
+<td>9 612 €</td>
+<td><strong>9 612 €</strong></td>
+<td>≈ 3 700 € + prévoyance cadre</td>
+<td>≈ 3 700 € + prévoyance cadre</td>
+</tr>
+</tbody></table></div>
+<p><em>*Ordre de grandeur de la pension annuelle brute si ce schéma était maintenu pendant toute une carrière de 43 ans : retraite de base à 50 % du revenu retenu (plafonné au PASS), plus les points de complémentaire acquis chaque année multipliés par la valeur de service 2026. Ce n&#39;est pas une promesse : les règles et la valeur du point changeront d&#39;ici là.</em></p>
+<p>Pourquoi un tel écart ? Parce qu&#39;en dessous de <strong>24 990 € de salaire brut</strong> annuel, le président de SASU n&#39;a pas droit aux indemnités journalières ni à la pension d&#39;invalidité (il faut avoir cotisé sur au moins 2 030 heures de SMIC sur 12 mois). Et parce que la retraite complémentaire des indépendants (RCI) cotise jusqu&#39;à 4 PASS, à 8,1 % puis 9,1 % depuis la réforme.</p>
+<p>Rappelez-vous la ligne en italique du premier tableau : sur 77 858 € prélevés en EURL IS, <strong>19 793 € financent vos propres droits à la retraite</strong>. En SASU IS optimisée, c&#39;est 5 055 € sur 82 761 €. Le reste, dans les deux cas, finance la solidarité (CSG, maladie, famille) et l&#39;État (IS, IR).</p>
+<h3>Combien coûte la protection en SASU ?</h3>
+<p>Mettons que vous teniez à la SASU. Que coûte le fait de vous verser un vrai salaire ? Pour juger, je compare avec ce que donnerait le même effort placé 43 ans à 2 % par an au-dessus de l&#39;inflation, puis converti en rente à 4 % (hypothèses de prudence, discutables, mais explicites).</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Passage (180 000 €, célibataire)</th>
+<th>Revenu disponible perdu par an</th>
+<th>Pension « carrière complète » gagnée</th>
+<th>Même effort en épargne privée</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SASU : salaire optimal → 24 990 € brut (seuil IJ)</td>
+<td>73 €</td>
+<td>+1 130 €/an</td>
+<td>≈ 195 €/an</td>
+</tr>
+<tr>
+<td>SASU : salaire optimal → 48 060 € brut (1 PASS)</td>
+<td>1 920 €</td>
+<td>+17 048 €/an</td>
+<td>≈ 5 157 €/an</td>
+</tr>
+<tr>
+<td>SASU : salaire optimal → 100 000 € brut</td>
+<td>8 951 €</td>
+<td>+44 105 €/an</td>
+<td>≈ 24 046 €/an</td>
+</tr>
+<tr>
+<td>EURL IS : optimum → tout en rémunération</td>
+<td>5 580 €</td>
+<td>+1 162 €/an</td>
+<td>≈ 14 991 €/an</td>
+</tr>
+<tr>
+<td><strong>SASU optimisée → EURL optimisée</strong></td>
+<td><strong>−4 903 € (vous gagnez)</strong></td>
+<td><strong>+37 789 €/an</strong></td>
+<td>gagnant sur les deux tableaux</td>
+</tr>
+</tbody></table></div>
+<p>Deux enseignements, dont un contre-intuitif :</p>
+<ol>
+<li><strong>En SASU, l&#39;« optimum » fiscal est un piège pour la protection.</strong> Monter le salaire jusqu&#39;au seuil des indemnités journalières coûte 73 € par an. Jusqu&#39;au PASS, 1 920 € par an, pour une retraite de base complète. Si vous restez en SASU, ne vous arrêtez pas à l&#39;optimum du simulateur.</li>
+<li><strong>En EURL, inutile de tout passer en rémunération</strong> pour « cotiser plus » : au-delà du PASS, le supplément de droits est faible et le coût élevé.</li>
+</ol>
+<h2>Les points de bascule : à partir de quand une structure devient meilleure</h2>
+<p>J&#39;ai refait le calcul pour chaque bénéfice entre 10 000 € et 400 000 €, par pas de 2 500 €, chaque structure étant optimisée à chaque fois.</p>
+<p><figure><svg aria-label="Gain de revenu disponible par rapport à l&#39;EI, célibataire" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" width="760" height="440" role="img" aria-labelledby="t d"><title id="t">Gain de revenu disponible par rapport à l'EI / EURL à l'IR</title><desc id="d">Célibataire sans enfant, chaque structure optimisée (rémunération / dividendes), règles 2026</desc><style>
+  .bg{fill:#fcfcfb} .t1{fill:#0b0b0b} .t2{fill:#52514e} .t3{fill:#898781}
+  .grid{stroke:#e1e0d9;stroke-width:1} .axis{stroke:#c3c2b7;stroke-width:1}
+  .ring{stroke:#fcfcfb} .ln{fill:none;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+  text{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+  .tab{font-variant-numeric:tabular-nums}
+  .s1{stroke:#2a78d6;fill:#2a78d6}.s2{stroke:#eb6834;fill:#eb6834}.s3{stroke:#1baf7a;fill:#1baf7a}.s4{stroke:#eda100;fill:#eda100}.g0{fill:#2a78d6}.g1{fill:#eb6834}.g2{fill:#1baf7a}.g3{fill:#eda100}.g4{fill:#e87ba4}.g5{fill:#008300}
+  @media (prefers-color-scheme: dark){
+    .bg{fill:#1a1a19} .t1{fill:#f0efec} .t2{fill:#c3c2b7}
+    .grid{stroke:#2c2c2a} .axis{stroke:#383835} .ring{stroke:#1a1a19}
+    .s1{stroke:#3987e5;fill:#3987e5}.s2{stroke:#d95926;fill:#d95926}.s3{stroke:#199e70;fill:#199e70}.s4{stroke:#c98500;fill:#c98500}.g0{fill:#3987e5}.g1{fill:#d95926}.g2{fill:#199e70}.g3{fill:#c98500}.g4{fill:#d55181}.g5{fill:#008300}
+  }
+  path.ln,line.ln{fill:none}
+  
+</style><rect class="bg" width="760" height="440" rx="8"/><text class="t1" x="24" y="30" font-size="17" font-weight="600">Gain de revenu disponible par rapport à l'EI / EURL à l'IR</text><text class="t2" x="24" y="52" font-size="13">Célibataire sans enfant, chaque structure optimisée (rémunération / dividendes), règles 2026</text><line class="ln s1" x1="24" y1="74" x2="42" y2="74"/><text class="t2" x="48" y="78" font-size="12">EURL à l'IS</text><line class="ln s2" x1="142.6" y1="74" x2="160.6" y2="74"/><text class="t2" x="166.6" y="78" font-size="12">SASU à l'IS</text><line class="ln s4" x1="261.2" y1="74" x2="279.2" y2="74"/><text class="t2" x="285.2" y="78" font-size="12">SASU à l'IR</text><line class="axis" x1="379.79999999999995" y1="74" x2="397.79999999999995" y2="74" stroke-width="2"/><text class="t2" x="403.79999999999995" y="78" font-size="12">Ligne 0 = EI / EURL à l'IR (référence)</text><line class="grid" x1="74" x2="632" y1="388" y2="388"/><text class="t3 tab" x="66" y="392" font-size="11" text-anchor="end">-15 k€</text><line class="grid" x1="74" x2="632" y1="361.09090909090907" y2="361.09090909090907"/><text class="t3 tab" x="66" y="365.09090909090907" font-size="11" text-anchor="end">-10 k€</text><line class="grid" x1="74" x2="632" y1="334.1818181818182" y2="334.1818181818182"/><text class="t3 tab" x="66" y="338.1818181818182" font-size="11" text-anchor="end">-5 k€</text><line class="axis" x1="74" x2="632" y1="307.27272727272725" y2="307.27272727272725"/><text class="t3 tab" x="66" y="311.27272727272725" font-size="11" text-anchor="end">0 k€</text><line class="grid" x1="74" x2="632" y1="280.3636363636364" y2="280.3636363636364"/><text class="t3 tab" x="66" y="284.3636363636364" font-size="11" text-anchor="end">+5 k€</text><line class="grid" x1="74" x2="632" y1="253.45454545454544" y2="253.45454545454544"/><text class="t3 tab" x="66" y="257.45454545454544" font-size="11" text-anchor="end">+10 k€</text><line class="grid" x1="74" x2="632" y1="226.54545454545453" y2="226.54545454545453"/><text class="t3 tab" x="66" y="230.54545454545453" font-size="11" text-anchor="end">+15 k€</text><line class="grid" x1="74" x2="632" y1="199.63636363636363" y2="199.63636363636363"/><text class="t3 tab" x="66" y="203.63636363636363" font-size="11" text-anchor="end">+20 k€</text><line class="grid" x1="74" x2="632" y1="172.72727272727272" y2="172.72727272727272"/><text class="t3 tab" x="66" y="176.72727272727272" font-size="11" text-anchor="end">+25 k€</text><line class="grid" x1="74" x2="632" y1="145.8181818181818" y2="145.8181818181818"/><text class="t3 tab" x="66" y="149.8181818181818" font-size="11" text-anchor="end">+30 k€</text><line class="grid" x1="74" x2="632" y1="118.9090909090909" y2="118.9090909090909"/><text class="t3 tab" x="66" y="122.9090909090909" font-size="11" text-anchor="end">+35 k€</text><line class="grid" x1="74" x2="632" y1="92" y2="92"/><text class="t3 tab" x="66" y="96" font-size="11" text-anchor="end">+40 k€</text><text class="t3 tab" x="118.05263157894737" y="406" font-size="11" text-anchor="middle">50 k€</text><text class="t3 tab" x="191.4736842105263" y="406" font-size="11" text-anchor="middle">100 k€</text><text class="t3 tab" x="264.89473684210526" y="406" font-size="11" text-anchor="middle">150 k€</text><text class="t3 tab" x="338.3157894736842" y="406" font-size="11" text-anchor="middle">200 k€</text><text class="t3 tab" x="411.7368421052632" y="406" font-size="11" text-anchor="middle">250 k€</text><text class="t3 tab" x="485.1578947368421" y="406" font-size="11" text-anchor="middle">300 k€</text><text class="t3 tab" x="558.578947368421" y="406" font-size="11" text-anchor="middle">350 k€</text><text class="t3 tab" x="632" y="406" font-size="11" text-anchor="middle">400 k€</text><text class="t3" x="353" y="428" font-size="11" text-anchor="middle">Bénéfice annuel avant rémunération du dirigeant</text><line class="grid" x1="308.9473684210526" x2="308.9473684210526" y1="92" y2="388"/><text class="t3" x="312.9473684210526" y="102" font-size="11">180 k€</text><path class="ln s1" d="M74.0,307.3L81.3,306.4L88.7,305.4L96.0,305.1L103.4,304.8L110.7,302.8L118.1,300.8L125.4,299.3L132.7,297.8L140.1,296.3L147.4,295.8L154.8,293.6L162.1,292.0L169.4,290.3L176.8,288.5L184.1,288.5L191.5,287.6L198.8,286.4L206.2,285.7L213.5,285.1L220.8,283.0L228.2,280.1L235.5,277.1L242.9,274.3L250.2,271.4L257.6,268.4L264.9,265.4L272.2,262.5L279.6,259.5L286.9,256.6L294.3,253.7L301.6,250.7L308.9,247.8L316.3,245.2L323.6,243.0L331.0,240.7L338.3,238.9L345.7,237.2L353.0,235.0L360.3,232.8L367.7,230.6L375.0,228.3L382.4,226.1L389.7,223.8L397.1,221.6L404.4,217.5L411.7,213.2L419.1,208.9L426.4,205.9L433.8,203.2L441.1,201.4L448.4,199.6L455.8,197.9L463.1,195.2L470.5,192.1L477.8,188.9L485.2,185.8L492.5,182.7L499.8,179.6L507.2,176.6L514.5,173.5L521.9,170.4L529.2,166.7L536.6,163.0L543.9,159.2L551.2,155.5L558.6,151.6L565.9,147.8L573.3,144.0L580.6,140.2L587.9,136.4L595.3,132.6L602.6,128.8L610.0,125.0L617.3,121.6L624.7,118.3L632.0,115.0"/><circle class="s1 ring" cx="632" cy="115.03738856284014" r="4" stroke-width="2"/><path class="ln s2" d="M74.0,309.2L81.3,308.5L88.7,305.5L96.0,303.1L103.4,301.2L110.7,299.5L118.1,297.8L125.4,295.7L132.7,293.4L140.1,291.2L147.4,292.4L154.8,292.6L162.1,292.2L169.4,291.6L176.8,290.8L184.1,291.5L191.5,292.4L198.8,293.4L206.2,294.3L213.5,295.2L220.8,294.7L228.2,293.2L235.5,291.7L242.9,290.3L250.2,288.9L257.6,287.5L264.9,286.1L272.2,284.6L279.6,282.7L286.9,280.6L294.3,278.5L301.6,276.3L308.9,274.2L316.3,272.0L323.6,269.8L331.0,267.7L338.3,266.0L345.7,264.3L353.0,262.6L360.3,260.9L367.7,259.2L375.0,257.6L382.4,255.9L389.7,254.2L397.1,252.5L404.4,249.0L411.7,245.2L419.1,241.5L426.4,239.0L433.8,236.6L441.1,234.2L448.4,231.7L455.8,229.3L463.1,226.9L470.5,224.4L477.8,222.0L485.2,219.6L492.5,217.2L499.8,214.8L507.2,212.5L514.5,210.1L521.9,207.7L529.2,204.7L536.6,201.7L543.9,199.0L551.2,196.6L558.6,194.1L565.9,191.7L573.3,189.3L580.6,186.9L587.9,184.5L595.3,182.0L602.6,179.6L610.0,177.2L617.3,174.8L624.7,172.3L632.0,169.9"/><circle class="s2 ring" cx="632" cy="169.92481369575893" r="4" stroke-width="2"/><path class="ln s4" d="M74.0,297.3L81.3,297.6L88.7,296.6L96.0,296.9L103.4,298.8L110.7,299.3L118.1,298.7L125.4,297.8L132.7,296.4L140.1,294.6L147.4,294.7L154.8,293.8L162.1,292.3L169.4,290.5L176.8,288.5L184.1,288.0L191.5,289.0L198.8,291.5L206.2,294.0L213.5,296.5L220.8,297.5L228.2,297.7L235.5,297.8L242.9,298.0L250.2,298.2L257.6,298.3L264.9,298.5L272.2,298.6L279.6,298.8L286.9,298.9L294.3,299.0L301.6,299.0L308.9,299.1L316.3,299.2L323.6,299.2L331.0,299.3L338.3,299.8L345.7,300.9L353.0,302.4L360.3,304.0L367.7,305.5L375.0,307.1L382.4,308.6L389.7,310.2L397.1,311.7L404.4,311.4L411.7,310.8L419.1,310.4L426.4,311.1L433.8,311.9L441.1,312.7L448.4,313.5L455.8,315.0L463.1,316.6L470.5,318.1L477.8,319.7L485.2,321.2L492.5,322.8L499.8,324.4L507.2,326.0L514.5,327.6L521.9,329.3L529.2,330.2L536.6,331.2L543.9,332.1L551.2,333.1L558.6,334.0L565.9,335.0L573.3,335.9L580.6,336.9L587.9,337.8L595.3,338.8L602.6,339.7L610.0,340.7L617.3,341.6L624.7,342.6L632.0,343.5"/><circle class="s4 ring" cx="632" cy="343.53488436834414" r="4" stroke-width="2"/><text class="t1 tab" x="642" y="113.03738856284014" font-size="12" font-weight="600">+35 719 €</text><text class="t2" x="642" y="127.03738856284014" font-size="11">EURL à l'IS</text><text class="t1 tab" x="642" y="167.92481369575893" font-size="12" font-weight="600">+25 521 €</text><text class="t2" x="642" y="181.92481369575893" font-size="11">SASU à l'IS</text><text class="t1 tab" x="642" y="341.53488436834414" font-size="12" font-weight="600">-6 738 €</text><text class="t2" x="642" y="355.53488436834414" font-size="11">SASU à l'IR</text></svg></figure></p>
+<h3>Célibataire sans enfant</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Bénéfice</th>
+<th>EI / EURL IR</th>
+<th>EURL IS</th>
+<th>SASU IS</th>
+<th>SASU IR</th>
+<th>Gagnant (avance sur le 2e)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>40 k€</td>
+<td>25 788 €</td>
+<td>26 248 €</td>
+<td>26 923 €</td>
+<td><strong>27 371 €</strong></td>
+<td>SASU IR (+448 €)</td>
+</tr>
+<tr>
+<td>60 k€</td>
+<td>35 033 €</td>
+<td>36 795 €</td>
+<td><strong>37 618 €</strong></td>
+<td>37 045 €</td>
+<td>SASU IS (+573 €)</td>
+</tr>
+<tr>
+<td>100 k€</td>
+<td>54 649 €</td>
+<td><strong>58 306 €</strong></td>
+<td>57 410 €</td>
+<td>58 052 €</td>
+<td>EURL IS (+254 €)</td>
+</tr>
+<tr>
+<td>150 k€</td>
+<td>78 013 €</td>
+<td><strong>85 785 €</strong></td>
+<td>81 950 €</td>
+<td>79 646 €</td>
+<td>EURL IS (+3 835 €)</td>
+</tr>
+<tr>
+<td>180 k€</td>
+<td>91 089 €</td>
+<td><strong>102 142 €</strong></td>
+<td>97 239 €</td>
+<td>92 603 €</td>
+<td>EURL IS (+4 903 €)</td>
+</tr>
+<tr>
+<td>300 k€</td>
+<td>142 684 €</td>
+<td><strong>165 253 €</strong></td>
+<td>158 979 €</td>
+<td>140 094 €</td>
+<td>EURL IS (+6 274 €)</td>
+</tr>
+</tbody></table></div>
+<p>Les seuils à retenir, en laissant de côté la SASU à l&#39;IR (temporaire, j&#39;y reviens) :</p>
+<ul>
+<li><strong>jusqu&#39;à 30 000 €</strong> : EURL IS et EI font jeu égal (à ce niveau, l&#39;impôt est faible et l&#39;abattement de 10 % ne rapporte presque rien) ;</li>
+<li><strong>de 30 000 € à 79 000 €</strong> : la <strong>SASU à l&#39;IS</strong> passe devant, avec très peu de salaire et beaucoup de dividendes ;</li>
+<li><strong>au-delà de 79 000 €</strong> : l&#39;<strong>EURL à l&#39;IS</strong> reprend la tête, et son avance grandit avec le bénéfice.</li>
+</ul>
+<p>Attention, entre 70 000 € et 100 000 €, les trois formes de société tiennent dans un mouchoir de poche (quelques centaines d&#39;euros, moins de 1,5 % d&#39;écart). Dans cette zone, choisissez sur d&#39;autres critères que l&#39;optimisation fiscale.</p>
+<p><strong>Le point qui change tout : la protection.</strong> Si j&#39;impose à la SASU un salaire d&#39;au moins 24 990 € brut (pour avoir des indemnités journalières et une pension d&#39;invalidité, ce que l&#39;EURL offre dès quelques milliers d&#39;euros), <strong>l&#39;EURL à l&#39;IS gagne sur toute la plage, de 20 000 € à 400 000 €</strong>. Avec un plancher plus modeste de 7 212 € brut (juste de quoi valider 4 trimestres), la fenêtre de la SASU se réduit à 44 000 € à 79 000 €.</p>
+<h3>Couple marié ou pacsé, deux enfants, conjoint sans revenu (3 parts)</h3>
+<p><figure><svg aria-label="Gain de revenu disponible par rapport à l&#39;EI, couple avec deux enfants" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" width="760" height="440" role="img" aria-labelledby="t d"><title id="t">Gain de revenu disponible par rapport à l'EI / EURL à l'IR</title><desc id="d">Couple, 2 enfants, conjoint sans revenu (3 parts), chaque structure optimisée, règles 2026</desc><style>
+  .bg{fill:#fcfcfb} .t1{fill:#0b0b0b} .t2{fill:#52514e} .t3{fill:#898781}
+  .grid{stroke:#e1e0d9;stroke-width:1} .axis{stroke:#c3c2b7;stroke-width:1}
+  .ring{stroke:#fcfcfb} .ln{fill:none;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+  text{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+  .tab{font-variant-numeric:tabular-nums}
+  .s1{stroke:#2a78d6;fill:#2a78d6}.s2{stroke:#eb6834;fill:#eb6834}.s3{stroke:#1baf7a;fill:#1baf7a}.s4{stroke:#eda100;fill:#eda100}.g0{fill:#2a78d6}.g1{fill:#eb6834}.g2{fill:#1baf7a}.g3{fill:#eda100}.g4{fill:#e87ba4}.g5{fill:#008300}
+  @media (prefers-color-scheme: dark){
+    .bg{fill:#1a1a19} .t1{fill:#f0efec} .t2{fill:#c3c2b7}
+    .grid{stroke:#2c2c2a} .axis{stroke:#383835} .ring{stroke:#1a1a19}
+    .s1{stroke:#3987e5;fill:#3987e5}.s2{stroke:#d95926;fill:#d95926}.s3{stroke:#199e70;fill:#199e70}.s4{stroke:#c98500;fill:#c98500}.g0{fill:#3987e5}.g1{fill:#d95926}.g2{fill:#199e70}.g3{fill:#c98500}.g4{fill:#d55181}.g5{fill:#008300}
+  }
+  path.ln,line.ln{fill:none}
+  
+</style><rect class="bg" width="760" height="440" rx="8"/><text class="t1" x="24" y="30" font-size="17" font-weight="600">Gain de revenu disponible par rapport à l'EI / EURL à l'IR</text><text class="t2" x="24" y="52" font-size="13">Couple, 2 enfants, conjoint sans revenu (3 parts), chaque structure optimisée, règles 2026</text><line class="ln s1" x1="24" y1="74" x2="42" y2="74"/><text class="t2" x="48" y="78" font-size="12">EURL à l'IS</text><line class="ln s2" x1="142.6" y1="74" x2="160.6" y2="74"/><text class="t2" x="166.6" y="78" font-size="12">SASU à l'IS</text><line class="ln s4" x1="261.2" y1="74" x2="279.2" y2="74"/><text class="t2" x="285.2" y="78" font-size="12">SASU à l'IR</text><line class="axis" x1="379.79999999999995" y1="74" x2="397.79999999999995" y2="74" stroke-width="2"/><text class="t2" x="403.79999999999995" y="78" font-size="12">Ligne 0 = EI / EURL à l'IR (référence)</text><line class="grid" x1="74" x2="632" y1="388" y2="388"/><text class="t3 tab" x="66" y="392" font-size="11" text-anchor="end">-15 k€</text><line class="grid" x1="74" x2="632" y1="361.09090909090907" y2="361.09090909090907"/><text class="t3 tab" x="66" y="365.09090909090907" font-size="11" text-anchor="end">-10 k€</text><line class="grid" x1="74" x2="632" y1="334.1818181818182" y2="334.1818181818182"/><text class="t3 tab" x="66" y="338.1818181818182" font-size="11" text-anchor="end">-5 k€</text><line class="axis" x1="74" x2="632" y1="307.27272727272725" y2="307.27272727272725"/><text class="t3 tab" x="66" y="311.27272727272725" font-size="11" text-anchor="end">0 k€</text><line class="grid" x1="74" x2="632" y1="280.3636363636364" y2="280.3636363636364"/><text class="t3 tab" x="66" y="284.3636363636364" font-size="11" text-anchor="end">+5 k€</text><line class="grid" x1="74" x2="632" y1="253.45454545454544" y2="253.45454545454544"/><text class="t3 tab" x="66" y="257.45454545454544" font-size="11" text-anchor="end">+10 k€</text><line class="grid" x1="74" x2="632" y1="226.54545454545453" y2="226.54545454545453"/><text class="t3 tab" x="66" y="230.54545454545453" font-size="11" text-anchor="end">+15 k€</text><line class="grid" x1="74" x2="632" y1="199.63636363636363" y2="199.63636363636363"/><text class="t3 tab" x="66" y="203.63636363636363" font-size="11" text-anchor="end">+20 k€</text><line class="grid" x1="74" x2="632" y1="172.72727272727272" y2="172.72727272727272"/><text class="t3 tab" x="66" y="176.72727272727272" font-size="11" text-anchor="end">+25 k€</text><line class="grid" x1="74" x2="632" y1="145.8181818181818" y2="145.8181818181818"/><text class="t3 tab" x="66" y="149.8181818181818" font-size="11" text-anchor="end">+30 k€</text><line class="grid" x1="74" x2="632" y1="118.9090909090909" y2="118.9090909090909"/><text class="t3 tab" x="66" y="122.9090909090909" font-size="11" text-anchor="end">+35 k€</text><line class="grid" x1="74" x2="632" y1="92" y2="92"/><text class="t3 tab" x="66" y="96" font-size="11" text-anchor="end">+40 k€</text><text class="t3 tab" x="118.05263157894737" y="406" font-size="11" text-anchor="middle">50 k€</text><text class="t3 tab" x="191.4736842105263" y="406" font-size="11" text-anchor="middle">100 k€</text><text class="t3 tab" x="264.89473684210526" y="406" font-size="11" text-anchor="middle">150 k€</text><text class="t3 tab" x="338.3157894736842" y="406" font-size="11" text-anchor="middle">200 k€</text><text class="t3 tab" x="411.7368421052632" y="406" font-size="11" text-anchor="middle">250 k€</text><text class="t3 tab" x="485.1578947368421" y="406" font-size="11" text-anchor="middle">300 k€</text><text class="t3 tab" x="558.578947368421" y="406" font-size="11" text-anchor="middle">350 k€</text><text class="t3 tab" x="632" y="406" font-size="11" text-anchor="middle">400 k€</text><text class="t3" x="353" y="428" font-size="11" text-anchor="middle">Bénéfice annuel avant rémunération du dirigeant</text><line class="grid" x1="308.9473684210526" x2="308.9473684210526" y1="92" y2="388"/><text class="t3" x="312.9473684210526" y="102" font-size="11">180 k€</text><path class="ln s1" d="M74.0,307.3L81.3,307.3L88.7,307.3L96.0,307.2L103.4,307.3L110.7,307.3L118.1,307.2L125.4,307.3L132.7,307.2L140.1,306.2L147.4,303.0L154.8,302.7L162.1,302.4L169.4,302.1L176.8,301.8L184.1,302.2L191.5,302.9L198.8,299.0L206.2,294.8L213.5,293.1L220.8,291.6L228.2,290.1L235.5,288.7L242.9,287.3L250.2,285.8L257.6,284.3L264.9,282.8L272.2,281.3L279.6,279.9L286.9,278.7L294.3,278.0L301.6,277.4L308.9,276.7L316.3,276.1L323.6,275.4L331.0,274.8L338.3,274.8L345.7,274.3L353.0,273.7L360.3,273.0L367.7,272.4L375.0,271.7L382.4,268.7L389.7,265.7L397.1,262.7L404.4,258.4L411.7,255.4L419.1,253.1L426.4,252.2L433.8,250.6L441.1,248.2L448.4,245.7L455.8,243.3L463.1,240.9L470.5,238.4L477.8,236.0L485.2,233.7L492.5,231.5L499.8,229.3L507.2,227.1L514.5,224.9L521.9,222.6L529.2,220.4L536.6,218.2L543.9,215.9L551.2,213.7L558.6,211.4L565.9,209.2L573.3,206.9L580.6,204.7L587.9,202.4L595.3,200.2L602.6,197.9L610.0,195.7L617.3,193.4L624.7,191.2L632.0,188.9"/><circle class="s1 ring" cx="632" cy="188.92185362581822" r="4" stroke-width="2"/><path class="ln s2" d="M74.0,309.2L81.3,309.4L88.7,309.4L96.0,309.9L103.4,310.2L110.7,311.4L118.1,312.6L125.4,313.7L132.7,314.6L140.1,314.5L147.4,315.3L154.8,315.1L162.1,314.2L169.4,313.1L176.8,311.6L184.1,312.7L191.5,314.6L198.8,314.2L206.2,313.6L213.5,313.0L220.8,312.3L228.2,311.7L235.5,311.0L242.9,310.4L250.2,309.8L257.6,309.2L264.9,308.6L272.2,307.5L279.6,306.3L286.9,305.1L294.3,304.6L301.6,305.4L308.9,306.2L316.3,306.9L323.6,307.7L331.0,308.4L338.3,309.7L345.7,311.1L353.0,312.4L360.3,313.7L367.7,315.1L375.0,316.4L382.4,315.4L389.7,314.3L397.1,313.3L404.4,311.0L411.7,308.6L419.1,306.4L426.4,305.4L433.8,304.5L441.1,303.6L448.4,302.7L455.8,301.8L463.1,300.9L470.5,300.0L477.8,299.1L485.2,298.2L492.5,297.3L499.8,296.5L507.2,295.6L514.5,294.8L521.9,294.0L529.2,293.2L536.6,292.3L543.9,291.5L551.2,290.7L558.6,289.8L565.9,289.0L573.3,288.2L580.6,287.4L587.9,286.5L595.3,285.7L602.6,284.9L610.0,284.0L617.3,283.2L624.7,282.4L632.0,281.6"/><circle class="s2 ring" cx="632" cy="281.5559666589925" r="4" stroke-width="2"/><path class="ln s4" d="M74.0,296.0L81.3,293.3L88.7,291.3L96.0,288.8L103.4,286.1L110.7,283.9L118.1,283.3L125.4,284.8L132.7,286.0L140.1,285.7L147.4,286.2L154.8,284.9L162.1,282.1L169.4,280.1L176.8,280.7L184.1,283.8L191.5,287.6L198.8,287.5L206.2,287.3L213.5,287.0L220.8,286.7L228.2,286.3L235.5,286.0L242.9,285.7L250.2,285.5L257.6,285.2L264.9,284.9L272.2,284.6L279.6,284.2L286.9,283.9L294.3,283.5L301.6,283.1L308.9,282.7L316.3,282.3L323.6,282.7L331.0,285.0L338.3,287.9L345.7,290.8L353.0,293.8L360.3,296.7L367.7,299.6L375.0,302.5L382.4,303.0L389.7,303.6L397.1,304.1L404.4,303.4L411.7,302.7L419.1,302.0L426.4,302.7L433.8,303.3L441.1,304.0L448.4,304.7L455.8,305.4L463.1,306.0L470.5,306.7L477.8,307.4L485.2,308.1L492.5,308.8L499.8,309.5L507.2,310.3L514.5,311.1L521.9,311.8L529.2,312.6L536.6,313.3L543.9,314.1L551.2,314.8L558.6,315.6L565.9,316.4L573.3,317.1L580.6,317.9L587.9,318.6L595.3,319.4L602.6,320.1L610.0,320.9L617.3,321.6L624.7,322.4L632.0,323.7"/><circle class="s4 ring" cx="632" cy="323.67265973875055" r="4" stroke-width="2"/><text class="t1 tab" x="642" y="186.92185362581822" font-size="12" font-weight="600">+21 991 €</text><text class="t2" x="642" y="200.92185362581822" font-size="11">EURL à l'IS</text><text class="t1 tab" x="642" y="279.5559666589925" font-size="12" font-weight="600">+4 778 €</text><text class="t2" x="642" y="293.5559666589925" font-size="11">SASU à l'IS</text><text class="t1 tab" x="642" y="321.67265973875055" font-size="12" font-weight="600">-3 047 €</text><text class="t2" x="642" y="335.67265973875055" font-size="11">SASU à l'IR</text></svg></figure></p>
+<p>Avec 3 parts de quotient familial, les tranches basses de l&#39;IR s&#39;élargissent et le paysage change :</p>
+<ul>
+<li>entre les structures durables, <strong>l&#39;EURL à l&#39;IS est devant la SASU à l&#39;IS à tous les niveaux de bénéfice</strong> testés ;</li>
+<li>la SASU à l&#39;IR arrive en tête jusqu&#39;à environ 140 000 € (voir plus bas pourquoi je m&#39;en méfie) ;</li>
+<li>à 180 000 € : EURL IS 112 652 €, SASU IR 111 538 €, SASU IS 107 184 €, EI 106 978 €.</li>
+</ul>
+<h3>Couple dont le conjoint est salarié (40 000 € net imposable)</h3>
+<p>Les revenus du conjoint occupent déjà les tranches basses de l&#39;IR : le petit salaire de SASU perd son intérêt, et la SASU à l&#39;IS reste devant <strong>jusqu&#39;à 107 000 €</strong>, puis l&#39;EURL à l&#39;IS prend le relais. À 180 000 € : EURL IS 98 800 €, SASU IR 96 057 €, SASU IS 95 571 €, EI 93 090 €.</p>
+<p><strong>Morale : il n&#39;existe pas « un » point de bascule universel.</strong> Il dépend de votre foyer fiscal, des autres revenus, et de la protection que vous voulez. D&#39;où le simulateur.</p>
+<h2>La SASU à l&#39;IR : le bon plan qui sent le roussi</h2>
+<p>Sur le papier, la SASU à l&#39;IR gagne souvent aux petits et moyens bénéfices. Logique : le bénéfice n&#39;y supporte ni cotisations sociales ni IS, seulement l&#39;impôt sur le revenu et les prélèvements sociaux. Trois raisons de rester prudent :</p>
+<ol>
+<li><strong>C&#39;est temporaire.</strong> L&#39;option (article 239 bis AB du CGI) est réservée aux sociétés de moins de 5 ans et ne vaut que pour 5 exercices au maximum. Ce n&#39;est pas une stratégie de carrière.</li>
+<li><strong>L&#39;administration a durci sa position.</strong> Dans une <a target="_blank" rel="noopener" href="https://www.actu-juridique.fr/fiscalite/fiscal-finances/sasu-a-lir-bercy-tranche-les-dirigeants-non-remuneres-taxes-comme-rentiers/">réponse ministérielle n° 12673 publiée au JO le 2 juin 2026</a>, le Gouvernement confirme que le bénéfice d&#39;un président non rémunéré est soumis aux prélèvements sociaux sur les revenus du patrimoine, désormais 18,6 %. Une partie de la doctrine conteste cette lecture, une réponse ministérielle ne lie pas le juge, mais les contrôles l&#39;appliquent. Mes calculs retiennent cette position, et je l&#39;étends au président rémunéré (aucun texte ne soumet sa quote-part de bénéfice aux cotisations sociales).</li>
+<li><strong>La protection est quasi nulle</strong>, sauf à se verser un salaire, ce qui ruine l&#39;intérêt du montage.</li>
+</ol>
+<p>Et sans aucun salaire, gare à la <strong>taxe PUMa</strong> (cotisation subsidiaire maladie, articles L380-2 et D380-1 du code de la sécurité sociale) : 6,5 % des revenus du capital au-delà de 24 030 € dès que vos revenus d&#39;activité sont sous 9 612 €. À 180 000 €, une SASU 100 % dividendes paie 7 489 € de taxe PUMa. Un salaire d&#39;environ 11 740 € brut suffit à l&#39;effacer, c&#39;est d&#39;ailleurs le salaire que retient l&#39;optimiseur pour la SASU à l&#39;IR.</p>
+<h2>Et si je montais deux structures pour deux activités ?</h2>
+<p>Vous avez deux activités proches mais distinctes (par exemple du conseil et de la formation) : pourquoi ne pas les loger dans deux sociétés pour profiter deux fois des tranches basses ? J&#39;ai testé trois combinaisons, en optimisant la répartition du bénéfice entre les deux structures (célibataire) :</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Bénéfice total</th>
+<th>Meilleure structure seule</th>
+<th>EURL IS + SASU IS</th>
+<th>Deux SASU IS</th>
+<th>EI + SASU IS</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>80 k€</td>
+<td>EURL IS : 47 644 €</td>
+<td>49 654 € (+2 010 €)</td>
+<td>49 038 € (+1 394 €)</td>
+<td>49 218 € (+1 575 €)</td>
+</tr>
+<tr>
+<td>120 k€</td>
+<td>EURL IS : 69 394 €</td>
+<td>71 058 € (+1 665 €)</td>
+<td>70 008 € (+614 €)</td>
+<td>69 961 € (+568 €)</td>
+</tr>
+<tr>
+<td>180 k€</td>
+<td>EURL IS : 102 142 €</td>
+<td>103 700 € (+1 558 €)</td>
+<td>100 154 € (−1 988 €)</td>
+<td>100 831 € (−1 310 €)</td>
+</tr>
+<tr>
+<td>250 k€</td>
+<td>EURL IS : 139 200 €</td>
+<td>141 211 € (+2 011 €)</td>
+<td>136 169 € (−3 031 €)</td>
+<td>136 864 € (−2 336 €)</td>
+</tr>
+</tbody></table></div>
+<p>La meilleure combinaison (une EURL à l&#39;IS qui porte l&#39;essentiel, une SASU qui garde 42 000 € de bénéfice taxé à 15 % et distribue en dividendes) rapporte <strong>1 500 à 2 000 € par an</strong>. Deux SASU font mieux qu&#39;une seule SASU (+2 915 € à 180 000 €, grâce à la double tranche à 15 %), mais moins bien qu&#39;une seule EURL.</p>
+<p>Maintenant, retirez de ce gain le coût d&#39;une seconde société : expert-comptable, dépôt des comptes, assemblée annuelle, banque, CFE. Selon les cabinets, l&#39;ordre de grandeur se compte en milliers d&#39;euros par an (demandez des devis, je n&#39;ai pas de chiffre officiel à vous donner). Le gain fond, voire devient négatif.</p>
+<p>Et surtout : deux sociétés pour une même activité, découpée artificiellement, c&#39;est le terrain de jeu de l&#39;<strong>abus de droit</strong> (articles L64 et L64 A du livre des procédures fiscales, ce dernier visant les montages au but « principalement » fiscal). Deux structures se justifient quand il y a deux vraies activités : clientèles, contrats, moyens et risques distincts, ou la perspective de céder l&#39;une sans l&#39;autre. Pas pour grappiller 1 500 €.</p>
+<h2>Le bon dosage salaire / dividendes</h2>
+<p>Si vous êtes déjà en société, voici les rémunérations optimales trouvées par le moteur (célibataire) :</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Bénéfice</th>
+<th>SASU IS : salaire brut optimal</th>
+<th>EURL IS : rémunération optimale (coût société)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>50 k€</td>
+<td>5 383 €</td>
+<td>47 414 €</td>
+</tr>
+<tr>
+<td>100 k€</td>
+<td>11 735 €</td>
+<td>60 267 €</td>
+</tr>
+<tr>
+<td>150 k€</td>
+<td>11 735 €</td>
+<td>107 500 €</td>
+</tr>
+<tr>
+<td>180 k€</td>
+<td>23 352 €</td>
+<td>137 500 €</td>
+</tr>
+<tr>
+<td>250 k€</td>
+<td>23 352 €</td>
+<td>150 709 €</td>
+</tr>
+<tr>
+<td>400 k€</td>
+<td>23 352 €</td>
+<td>172 831 €</td>
+</tr>
+</tbody></table></div>
+<p>Lecture : en SASU, l&#39;optimum fiscal pur est un salaire modeste (de quoi échapper à la taxe PUMa, puis remplir les petites tranches de l&#39;IR). En EURL, on se rémunère largement et on laisse au moins 42 500 € de bénéfice à l&#39;IS à 15 %, davantage quand le bénéfice explose.</p>
+<p>Mais relisez la section protection : en SASU, viser au moins le seuil des indemnités journalières (24 990 € brut), voire le PASS, coûte très peu au regard des droits obtenus.</p>
+<h2>Les limites de l&#39;exercice (lisez-les)</h2>
+<p>Je joue le jeu du critique exigeant avec mes propres chiffres :</p>
+<ul>
+<li><strong>Tout est distribué chaque année.</strong> Si vous capitalisez dans la société (trésorerie placée, investissement, préparation d&#39;une cession), l&#39;IS à 15 % devient un atout majeur, en EURL comme en SASU, et le match change. Les structures à l&#39;IS gagnent encore en intérêt.</li>
+<li><strong>Pas de charges, pas d&#39;épargne retraite.</strong> PER et contrats Madelin, frais réels, véhicule, local : chacun change l&#39;équilibre. Les frais de fonctionnement d&#39;une société (comptabilité, juridique, souvent plus élevés qu&#39;en EI : demandez des devis) ne sont pas déduits ici. Ils ne changent pas le classement EURL IS contre SASU IS (deux sociétés), mais ils réduisent l&#39;avance de l&#39;EURL IS sur l&#39;EI.</li>
+<li><strong>Le point sensible de l&#39;EURL : qui paie les cotisations sur les dividendes ?</strong> Dans mon calcul, comme dans le simulateur de l&#39;Urssaf, la société règle l&#39;ensemble des cotisations du gérant, y compris celles dues sur les dividendes, et les déduit. C&#39;est la pratique courante. Dans une variante très prudente où le gérant les paie lui-même sans aucune déduction, l&#39;EURL IS reste devant à 180 000 € (99 366 € contre 97 239 €), fait jeu égal vers 250 000 €, et passe derrière la SASU au-delà. Faites valider ce point par votre expert-comptable.</li>
+<li><strong>Le barème d&#39;IR 2026 est celui des revenus 2025.</strong> La loi de finances pour 2027, qui fixera le barème applicable aux revenus 2026, n&#39;est pas adoptée à la date où j&#39;écris (novembre 2026). Un amendement au PLF 2027 adopté en commission à l&#39;Assemblée propose même de relever le seuil de l&#39;IS à 15 % à 49 000 € (<a target="_blank" rel="noopener" href="https://fiscalonline.com/outils-fiscaux/taux-reduit-impot-societes-pme-plf2027-plafond-porte-49-000-commission">source</a>). Rien n&#39;est voté à ce stade.</li>
+<li><strong>Les estimations de retraite sont des ordres de grandeur</strong>, pas des promesses : réformes, valeur du point, durée de carrière réelle.</li>
+<li><strong>Taxe PUMa</strong> : je retiens le salaire net imposable comme « revenu d&#39;activité » pour le seuil de 20 % du PASS. C&#39;est une hypothèse prudente, à confirmer avec l&#39;Urssaf. Et elle ne s&#39;applique pas si votre conjoint a des revenus d&#39;activité au-dessus du seuil.</li>
+<li><strong>Ce qui n&#39;est pas dans le calcul</strong> : l&#39;assurance chômage (aucune des quatre structures n&#39;en offre au dirigeant), l&#39;arrivée future d&#39;associés (la SAS est plus souple), une cession (le régime de la plus-value diffère selon la forme), l&#39;ACRE, les régimes particuliers (professions libérales réglementées, Alsace-Moselle, outre-mer).</li>
+</ul>
+<h2>Ce que j&#39;en retiens</h2>
+<ol>
+<li><strong>La SASU n&#39;est plus le choix par défaut.</strong> À 180 000 € de bénéfice, l&#39;EURL à l&#39;IS laisse 4 903 € de plus par an à un célibataire, et beaucoup plus de droits sociaux.</li>
+<li><strong>L&#39;EI à l&#39;IR est la grande perdante dès que le bénéfice est confortable</strong>, faute d&#39;abattement de 10 % et de tranche à 15 %. Une simple option pour l&#39;IS change la donne.</li>
+<li><strong>La SASU garde une fenêtre</strong> pour les bénéfices moyens (en gros 30 000 à 80 000 € pour un célibataire, jusqu&#39;à 107 000 € quand le conjoint gagne bien sa vie), à condition d&#39;accepter une protection minimale. Dès qu&#39;on veut des indemnités journalières, la fenêtre se ferme.</li>
+<li><strong>Deux structures ne valent le coup que pour deux vraies activités.</strong> Le gain fiscal seul ne couvre pas les frais.</li>
+<li><strong>Votre situation n&#39;est pas celle de l&#39;exemple.</strong> Foyer, autres revenus, envie de capitaliser, projet de cession : tout compte. Testez-la.</li>
+</ol>
+<p>👉 <strong><a target="_blank" rel="noopener" href="https://claude.ai/artifact/RFUDHB8Zbn8BBi1zUvn7iY">Testez votre situation avec le simulateur</a></strong> : bénéfice, foyer, enfants, autres revenus, plancher de salaire pour la protection. Il refait toute l&#39;optimisation en direct, vous montre les points de bascule pour votre foyer et ce que vos cotisations vous ouvrent comme droits.</p>
+<p>L&#39;argent est un outil au service de vos projets. Le statut juridique aussi. Choisissez-le en connaissant les chiffres, pas les slogans.</p>
+<hr>
+<h3>Méthode et sources</h3>
+<p>Calculs réalisés avec un moteur open source dont les cotisations sont vérifiées contre les moteurs officiels de l&#39;Urssaf (<code>modele-ti</code> 0.1.0, réforme de l&#39;assiette des indépendants incluse, et <code>modele-social</code> 11.1.0 pour les assimilés salariés) : écart inférieur à 0,05 % sur les cotisations, impôt sur le revenu identique à l&#39;euro près.</p>
+<ul>
+<li>PASS 2026 : 48 060 € (<a target="_blank" rel="noopener" href="https://www.previssima.fr/actualite/cest-officiel-le-pass-setablira-bien-a-48-060-au-1er-janvier-2026.html">arrêté du 22 décembre 2025, JO du 23 décembre 2025</a>).</li>
+<li>SMIC horaire : 12,02 € au 1er janvier 2026, 12,31 € depuis le <a target="_blank" rel="noopener" href="https://www.legisocial.fr/actualites-sociales/7944-revalorisation-automatique-smic-1er-juin-2026.html">1er juin 2026</a> (revalorisation automatique de 2,41 %).</li>
+<li>Barème de l&#39;IR : loi de finances pour 2026, indexation de 0,9 % (tranches à 11 600 €, 29 579 €, 84 577 € et 181 917 €), <a target="_blank" rel="noopener" href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000048805432">article 197 du CGI</a>.</li>
+<li>PFU 31,4 % et prélèvements sociaux 18,6 % : LFSS 2026, article 12, modifiant l&#39;<a target="_blank" rel="noopener" href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000051287395">article L136-8 CSS</a> (CSG sur les revenus du capital portée de 9,2 % à 10,6 %, <a target="_blank" rel="noopener" href="https://www.legifiscal.fr/actualites-fiscales/4369-janvier-2026-hausse-csg-appliquera-certains-placements-financiers.html">synthèse</a>).</li>
+<li>Réforme de l&#39;assiette des indépendants : décret n° 2024-688 du 5 juillet 2024, <a target="_blank" rel="noopener" href="https://www.urssaf.fr/accueil/independant/comprendre-payer-cotisations/reforme-cotisations-independants.html">page Urssaf</a>.</li>
+<li>Dividendes de gérant majoritaire soumis à cotisations au-delà de 10 % du capital : <a target="_blank" rel="noopener" href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000048683707">article L131-6 CSS</a>.</li>
+<li>IS : article 219 du CGI, taux réduit de 15 % jusqu&#39;à 42 500 € pour les PME éligibles (chiffre d&#39;affaires inférieur à 10 M€, capital entièrement libéré et détenu à 75 % au moins par des personnes physiques).</li>
+<li>SASU à l&#39;IR : article 239 bis AB du CGI ; <a target="_blank" rel="noopener" href="https://www.harvest.fr/sasu-a-lir-les-prelevements-sociaux-a-186-sont-confirmes-sur-les-benefices-bic-bnc-du-dirigeant-non-remunere/">réponse ministérielle n° 12673, JO AN du 2 juin 2026</a>.</li>
+<li>Taxe PUMa : articles L380-2 et D380-1 du code de la sécurité sociale (taux 6,5 %, seuils 20 % et 50 % du PASS, assiette plafonnée à 8 PASS).</li>
+<li>Abattement de 10 % et barème : <a target="_blank" rel="noopener" href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000037985819/">article 83 du CGI</a>, article 62 du CGI pour les gérants majoritaires.</li>
+<li>Taux AT/MP 2026 du code risque 70.3AD (agences immobilières) : 1,25 % (<a target="_blank" rel="noopener" href="https://travail-industrie.com/accidents-travail/taux-cotisation/70-3ad-promotion-vente-location-ou-administration-de-biens-immobiliers">arrêté du 30 décembre 2025</a>).</li>
+<li>Valeurs des points 2026 : Agirc-Arrco 20,1877 € (achat) et 1,4386 € (service) ; RCI 21,726 € et 1,347 € (valeurs utilisées par les moteurs Urssaf).</li>
+</ul>
+<p><em>Cet article est pédagogique et ne constitue ni un conseil fiscal ou juridique, ni une recommandation personnalisée. Les règles évoluent chaque année. Avant de créer ou de transformer votre société, faites valider votre situation par un expert-comptable ou un avocat fiscaliste.</em></p>
+
+</main>
+</body>
+</html>
