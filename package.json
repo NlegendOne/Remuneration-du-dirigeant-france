@@ -1,0 +1,19 @@
+{
+  "name": "remuneration-du-dirigeant-france",
+  "version": "1.0.0",
+  "description": "Comparateur EI/EURL/SASU (IR/IS) : revenu disponible et protection sociale du dirigeant, règles 2026",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "valider": "node scripts/valider-urssaf.mjs",
+    "analyse": "node scripts/analyse.mjs",
+    "build": "node scripts/build-simulateur.mjs"
+  },
+  "devDependencies": {
+    "marked": "^12.0.2",
+    "modele-social": "11.1.0",
+    "modele-ti": "0.1.0",
+    "publicodes": "1.10.4"
+  },
+  "license": "MIT"
+}
